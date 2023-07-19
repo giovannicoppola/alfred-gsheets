@@ -49,3 +49,33 @@ worksheet.update_cell(lastrow, mySource, myValue)
 #A1 = worksheet.acell('B2').value
 #print(A1)
 
+
+"""
+def download_column(sheet_name, column_name):
+    # Your Google Sheets API credentials JSON file path
+    credentials_file = 'path/to/your/credentials.json'
+
+    # Scope for accessing Google Sheets
+    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+
+    # Authenticate with Google Sheets API
+    creds = ServiceAccountCredentials.from_json_keyfile_name(credentials_file, scope)
+    client = gspread.authorize(creds)
+
+    # Open the specified Google Sheet
+    sheet = client.open(sheet_name)
+
+    # Select the first worksheet (index 0) or specify a specific worksheet by title.
+    worksheet = sheet.get_worksheet(0)
+
+    # Get the values from the specified column
+    column = worksheet.col_values(ord(column_name.upper()) - 64)  # Converts column letter to number (A=1, B=2, ..., Z=26)
+
+    return column
+
+# Replace 'Your_Sheet_Name' with the name of your Google Sheet and 'A' with the column letter you want to download.
+column_data = download_column('Your_Sheet_Name', 'A')
+print(column_data)
+
+
+"""
