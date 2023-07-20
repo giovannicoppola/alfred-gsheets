@@ -20,34 +20,116 @@ from oauth2client.service_account import ServiceAccountCredentials
 import json
 
 
-myValue = sys.argv[2]
+#myValue = sys.argv[2]
 mySource = sys.argv[1]
 
-
-scopes = [
-'https://www.googleapis.com/auth/spreadsheets',
-'https://www.googleapis.com/auth/drive'
-]
-credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
-#access the json key you downloaded earlier 
-
-file = gspread.authorize(credentials) # authenticate the JSON key with gspread
-sheet = file.open("Chiatto")  #open sheet
-worksheet = sheet.worksheet("weight")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
-
-#firstRow = len(worksheet.col_values(0))
-lastrow = len(worksheet.col_values(mySource))
-lastrow = lastrow+1
-worksheet.update_cell(lastrow, mySource, myValue)
+def log(s, *args):
+    if args:
+        s = s % args
+    print(s, file=sys.stderr)
 
 
-#worksheet.update(['Test1'], range='B2:L6')
+def addValue (myValue,mySource):
+    scopes = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive'
+    ]
+    credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
+    #access the json key you downloaded earlier 
 
-#all_cells = sheet.range('A1:C6')
-#print(all_cells)
+    file = gspread.authorize(credentials) # authenticate the JSON key with gspread
+    sheet = file.open("Chiatto")  #open sheet
+    worksheet = sheet.worksheet("weight")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
-#A1 = worksheet.acell('B2').value
-#print(A1)
+    #firstRow = len(worksheet.col_values(0))
+    lastrow = len(worksheet.col_values(mySource))
+    lastrow = lastrow+1
+    worksheet.update_cell(lastrow, mySource, myValue)
+
+
+    #worksheet.update(['Test1'], range='B2:L6')
+
+    #all_cells = sheet.range('A1:C6')
+    #print(all_cells)
+
+    #A1 = worksheet.acell('B2').value
+    #print(A1)
+
+
+def fetchValues (mySource):
+    result = {"items": []}
+    scopes = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive'
+    ]
+    credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
+    #access the json key you downloaded earlier 
+
+    file = gspread.authorize(credentials) # authenticate the JSON key with gspread
+    sheet = file.open("Chiatto")  #open sheet
+    worksheet = sheet.worksheet("weight")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+    # Get all values from the worksheet
+    all_values = worksheet.get_all_values()
+    
+    # Extract column headers (assuming the first row contains column headers)
+    column_headers = all_values[0]
+
+    # Create a list to store dictionaries representing each row
+    rows_as_list_of_dictionaries = []
+
+       # Iterate through each row (excluding the header row) and create a dictionary
+    for row in all_values[1:]:
+        row_dict = {}
+        for column_number in mySource:
+            if 1 <= column_number <= len(column_headers):
+                column_name = column_headers[column_number - 1]
+                row_dict[column_name] = row[column_number - 1]
+        rows_as_list_of_dictionaries.append(row_dict)
+
+    #log (rows_as_list_of_dictionaries)
+    
+    for myRow in rows_as_list_of_dictionaries:
+        
+
+        result["items"].append({
+                "title": myRow['Date'],
+                'subtitle': myRow['Gio'],
+                'valid': True,
+                
+            "mods": {
+                    "alt": {
+                        "valid": True,
+                        "arg": "alfredapp.com/powerpack/",
+                        "subtitle": "https://www.alfredapp.com/powerpack/"
+                        },
+                "cmd": {
+                    "valid": True,
+                    "arg": "alfredapp.com/shop/",
+                    "subtitle": "https://www.alfredapp.com/shop/"
+                        },
+                "cmd+alt": {
+                        "valid": True,
+                        "arg": "alfredapp.com/blog/",
+                        "subtitle": "https://www.alfredapp.com/blog/"
+                        },
+                },
+                "icon": {
+                    "path": 'icon.png'
+                },
+                'arg': "resultString"
+                    }) 
+    print (json.dumps(result))  
+
+
+
+def main ():
+    #addValue (myValue,mySource)
+    fetchValues ([1,2,3])
+
+
+if __name__ == '__main__':
+    main ()
+
 
 
 """

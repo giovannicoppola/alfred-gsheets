@@ -7,34 +7,7 @@
 	<key>category</key>
 	<string>Productivity</string>
 	<key>connections</key>
-	<dict>
-		<key>2ED137CC-1DD1-480D-B5D8-FB38A2EA935C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EBB15C83-19EF-432B-A514-89842B1AEE54</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EBB15C83-19EF-432B-A514-89842B1AEE54</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9CFCE7BD-CF74-43C6-AE2F-A38ED0A1EA18</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-	</dict>
+	<dict/>
 	<key>createdby</key>
 	<string>giovanni</string>
 	<key>description</key>
@@ -48,95 +21,64 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>wgio</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Giovanni's weight</string>
-				<key>withspace</key>
+				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>2ED137CC-1DD1-480D-B5D8-FB38A2EA935C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>mySource</key>
-					<string>2</string>
-					<key>myValue</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>EBB15C83-19EF-432B-A514-89842B1AEE54</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
+				<key>keyword</key>
+				<string>wwg</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
 				<key>script</key>
 				<string>export PYTHONPATH="$PWD/lib"
-python3 gioGoogleAPI.py $mySource $myValue</string>
+python3 gioGoogleAPI.py "2"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Sheet List</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>9CFCE7BD-CF74-43C6-AE2F-A38ED0A1EA18</string>
+			<string>0443C1B7-C877-403A-9909-D52A574ADF36</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>2ED137CC-1DD1-480D-B5D8-FB38A2EA935C</key>
+		<key>0443C1B7-C877-403A-9909-D52A574ADF36</key>
 		<dict>
 			<key>xpos</key>
-			<real>305</real>
+			<real>585</real>
 			<key>ypos</key>
-			<real>260</real>
-		</dict>
-		<key>9CFCE7BD-CF74-43C6-AE2F-A38ED0A1EA18</key>
-		<dict>
-			<key>xpos</key>
-			<real>800</real>
-			<key>ypos</key>
-			<real>395</real>
-		</dict>
-		<key>EBB15C83-19EF-432B-A514-89842B1AEE54</key>
-		<dict>
-			<key>xpos</key>
-			<real>580</real>
-			<key>ypos</key>
-			<real>290</real>
+			<real>110</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
