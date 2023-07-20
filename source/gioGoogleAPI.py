@@ -66,8 +66,24 @@ def fetchValues (mySource):
     #access the json key you downloaded earlier 
 
     file = gspread.authorize(credentials) # authenticate the JSON key with gspread
-    sheet = file.open("Chiatto")  #open sheet
-    worksheet = sheet.worksheet("weight")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+    try:
+        sheet = file.open("My Audiobooks")  #open sheet
+    
+    except gspread.exceptions.SpreadsheetNotFound as e: 
+        log ("caz!! ========")
+        resultErr= {"items": [{
+        "title": "Error ",
+        "subtitle": "Press Enter to check the instructions",
+        "arg": "",
+        "icon": {
+            "path": ""
+            }
+            }]}
+        print (json.dumps(resultErr))
+
+        sys.exit(1)
+
+    worksheet = sheet.worksheet("Read")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
     # Get all values from the worksheet
     all_values = worksheet.get_all_values()
     
@@ -92,8 +108,8 @@ def fetchValues (mySource):
         
 
         result["items"].append({
-                "title": myRow['Date'],
-                'subtitle': myRow['Gio'],
+                "title": myRow['Title'],
+                'subtitle': myRow['Year'],
                 'valid': True,
                 
             "mods": {
