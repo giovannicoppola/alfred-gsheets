@@ -24,3 +24,4 @@ The service account email address can be found in the JSON file downloaded in th
 
 # Icons
 https://www.flaticon.com/free-icon/table-cell_6099818
+https://www.flaticon.com/free-icon/add-button_8246338
