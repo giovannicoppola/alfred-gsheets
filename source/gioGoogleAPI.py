@@ -20,6 +20,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import json
 
 
+
 #myValue = sys.argv[2]
 mySource = sys.argv[1]
 
@@ -68,6 +69,7 @@ def fetchValues (mySource):
     file = gspread.authorize(credentials) # authenticate the JSON key with gspread
     try:
         sheet = file.open("My Audiobooks")  #open sheet
+        
     
     except gspread.exceptions.SpreadsheetNotFound as e: 
         log ("caz!! ========")
@@ -87,6 +89,7 @@ def fetchValues (mySource):
     # Get all values from the worksheet
     all_values = worksheet.get_all_values()
     
+    
     # Extract column headers (assuming the first row contains column headers)
     column_headers = all_values[0]
 
@@ -102,13 +105,13 @@ def fetchValues (mySource):
                 row_dict[column_name] = row[column_number - 1]
         rows_as_list_of_dictionaries.append(row_dict)
 
-    #log (rows_as_list_of_dictionaries)
+    log (rows_as_list_of_dictionaries)
     
     for myRow in rows_as_list_of_dictionaries:
         
 
         result["items"].append({
-                "title": myRow['Title'],
+                "title": f"{myRow['Title']} ({myRow['Author']})",
                 'subtitle': myRow['Year'],
                 'valid': True,
                 
@@ -136,11 +139,104 @@ def fetchValues (mySource):
                     }) 
     print (json.dumps(result))  
 
+def fetchValuesPublic (mySource):
+    result = {"items": []}
+    scopes = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive'
+    ]
+    credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
+    #access the json key you downloaded earlier 
+
+    file = gspread.authorize(credentials) # authenticate the JSON key with gspread
+    try:
+        #sheet = file.open("My Audiobooks")  #open sheet
+        spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1ZW6TlsuGv7oQFEv8sryubIzYyQ8OFebY_1or7TYzrdY/edit#gid=1827593641'
+        sheet = file.open_by_url(spreadsheet_url)
+    
+    except gspread.exceptions.SpreadsheetNotFound as e: 
+        log ("caz!! ========")
+        resultErr= {"items": [{
+        "title": "Error ",
+        "subtitle": "Press Enter to check the instructions",
+        "arg": "",
+        "icon": {
+            "path": ""
+            }
+            }]}
+        print (json.dumps(resultErr))
+
+        sys.exit(1)
+
+    worksheet = sheet.worksheet("Calories per 100g")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+    # Get all values from the worksheet
+    all_values = worksheet.get_all_values()
+    all_values = all_values[1:]
+    
+    # Extract column headers (assuming the first row contains column headers)
+    column_headers = all_values[0]
+
+    # Create a list to store dictionaries representing each row
+    rows_as_list_of_dictionaries = []
+
+       # Iterate through each row (excluding the header row) and create a dictionary
+    for row in all_values[1:]:
+        row_dict = {}
+        for column_number in mySource:
+            if 1 <= column_number <= len(column_headers):
+                column_name = column_headers[column_number - 1]
+                row_dict[column_name] = row[column_number - 1]
+        rows_as_list_of_dictionaries.append(row_dict)
+
+    log (rows_as_list_of_dictionaries)
+    
+    for myRow in rows_as_list_of_dictionaries:
+        
+
+        result["items"].append({
+                "title": f"{myRow['Name']} ({myRow['Calories per serving']})",
+                'subtitle': "myRow['']",
+                'valid': True,
+                
+            "mods": {
+                    "alt": {
+                        "valid": True,
+                        "arg": "alfredapp.com/powerpack/",
+                        "subtitle": "https://www.alfredapp.com/powerpack/"
+                        },
+                "cmd": {
+                    "valid": True,
+                    "arg": "alfredapp.com/shop/",
+                    "subtitle": "https://www.alfredapp.com/shop/"
+                        },
+                "cmd+alt": {
+                        "valid": True,
+                        "arg": "alfredapp.com/blog/",
+                        "subtitle": "https://www.alfredapp.com/blog/"
+                        },
+                },
+                "icon": {
+                    "path": 'icon.png'
+                },
+                'arg': "resultString"
+                    }) 
+    print (json.dumps(result))  
 
 
 def main ():
     #addValue (myValue,mySource)
-    fetchValues ([1,2,3])
+    fetchValues ([1,2,3,4])
+    #fetchValuesPublic ([1,2,3])
+    
+    # # The URL of the public Google Sheet
+    # spreadsheet_url = "https://docs.google.com/spreadsheets/d/1mnPLSFNf_t9-C4DOYxnVXIDU_G0hXDRf8kP2wLlkB8I/edit?pli=1#gid=0"
+
+    # # Access the public Google Sheet and print the data
+    # sheet_data = access_public_google_sheet(spreadsheet_url)
+
+    # if sheet_data is not None:
+    #     log(sheet_data)
+
 
 
 if __name__ == '__main__':

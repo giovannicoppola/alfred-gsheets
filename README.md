@@ -1,6 +1,13 @@
 # alfred-sheets
  
 
+Inspired by `I-sheet-you-not` this Workflow provides the means to create new Workflows to access individual Google Sheets.
+
+- If the Google sheet is public, you need
+	1. the link to the sheet
+	2. the columns to use (default: 1,2,3)
+	3. the title row (default: 1)
+
 Get google authentication
 
 You can do one of three things:
