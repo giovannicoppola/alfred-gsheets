@@ -1,6 +1,6 @@
 """
 CloneSheets
-A script to clone the current workflow and create a new one
+A script to clone the current workflow to create a new one
 Part of the alfred-sheets Workflow
 Giovanni Coppola
 Sunny ☀️   🌡️+74°F (feels +77°F, 56%) 🌬️↘2mph 🌒&m Sat Jul 22 10:57:18 2023

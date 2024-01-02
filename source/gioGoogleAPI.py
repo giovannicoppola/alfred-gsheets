@@ -14,20 +14,76 @@
 
 
 
+
 import sys
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
-
-
+from google.oauth2 import service_account
 
 #myValue = sys.argv[2]
-mySource = sys.argv[1]
+#mySource = sys.argv[1]
+myURL = sys.argv[1]
 
 def log(s, *args):
     if args:
         s = s % args
     print(s, file=sys.stderr)
+
+
+def validateURL (myurl):
+    result = {"items": []}
+    if "docs.google.com/spreadsheets" not in myurl:
+        result["items"].append({
+        
+        "title": "⚠️ Not a Google Spreadsheet!",
+        "subtitle": myurl,
+        "arg": "",
+        "icon": {
+            "path": ""
+            }
+            })
+        print (json.dumps(result))
+    
+    else:
+        allSheets = get_sheet_list (myurl)
+        
+        result["items"].append({
+        "title": "👍 This is a Google Spreadsheet!",
+        "subtitle": myurl,
+        "arg": "",
+        "icon": {
+            "path": ""
+            }
+            })
+
+        if allSheets == "Permission Denied":
+            result["items"].append({
+                "title": "🛑 Permission denied!",
+                "subtitle": "check spreadsheet permissions",
+                "arg": "",
+                "icon": {
+                    "path": ""
+                    }
+            })
+
+        else:
+            for currSheet in allSheets: 
+                result["items"].append({
+                "title": f"Browse sheet: {currSheet}",
+            "subtitle": myurl,
+            "arg": currSheet,
+            "icon": {
+                "path": ""
+                }
+                })
+                
+        
+        print (json.dumps(result))
+        
+    
+    return None
+
 
 
 def addValue (myValue,mySource):
@@ -56,6 +112,75 @@ def addValue (myValue,mySource):
     #A1 = worksheet.acell('B2').value
     #print(A1)
 
+
+
+
+def get_sheet_list(spreadsheet_url, creds_path='burattinaio-105c8840e188.json'):
+    try:
+        # Authenticate with Google Sheets using credentials
+        creds = service_account.Credentials.from_service_account_file(
+            creds_path,
+            scopes=['https://www.googleapis.com/auth/spreadsheets.readonly']
+        )
+
+        # Open the spreadsheet by URL
+        gc = gspread.Client(auth=creds)
+        gc.login()
+        spreadsheet = gc.open_by_url(spreadsheet_url)
+
+        # Get all sheets
+        all_sheets = spreadsheet.worksheets()
+        # Print the names of each worksheet
+        sheet_names = [worksheet.title for worksheet in all_sheets]
+        log(f"Sheet names:{sheet_names}")
+
+        
+        return sheet_names
+
+    except Exception as e:
+        log(f"An error occurred: {e}")
+        return "Permission Denied"
+
+
+
+
+
+
+
+def fetchSheetProperties (myurl):
+
+    
+    # scopes = [
+    # 'https://www.googleapis.com/auth/spreadsheets',
+    # 'https://www.googleapis.com/auth/drive'
+    # ]
+    # credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
+    # #access the json key you downloaded earlier 
+
+    # file = gspread.authorize(credentials) # authenticate the JSON key with gspread
+    try:
+        
+        active_sheet_name = get_active_sheet_name(myurl)
+
+        if active_sheet_name:
+            log(f"The active sheet is: {active_sheet_name}")
+        else:
+            log("Failed to retrieve the active sheet name.")
+
+           
+    
+    except gspread.exceptions.SpreadsheetNotFound as e: 
+        log ("caz!! ========")
+    
+    #worksheet = sheet.worksheet("Read")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+    
+    # Get all values from the worksheet
+    #all_values = worksheet.get_all_values()
+    # active_worksheet = sheet.worksheet(active_sheet_id)
+    # active_sheet_name = active_worksheet.title
+    return active_sheet_name
+    
+    
 
 def fetchValues (mySource):
     result = {"items": []}
@@ -225,7 +350,7 @@ def fetchValuesPublic (mySource):
 
 def main ():
     #addValue (myValue,mySource)
-    fetchValues ([1,2,3,4])
+    #fetchValues ([1,2,3,4])
     #fetchValuesPublic ([1,2,3])
     
     # # The URL of the public Google Sheet
@@ -236,6 +361,7 @@ def main ():
 
     # if sheet_data is not None:
     #     log(sheet_data)
+    validateURL(myURL)
 
 
 

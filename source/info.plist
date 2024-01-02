@@ -8,11 +8,63 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>31D75F56-959F-411F-BC8A-8E29FC3D1086</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FD0931C4-1DD8-434F-A70B-D332E6B48858</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>53F39B0D-9C43-4E24-A373-E39CAA4845A7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E44AD3EB-3F0D-41A4-B8FC-2B692625CE3F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6286DB17-C84B-4F43-8290-B1C0F928C7AB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FD0931C4-1DD8-434F-A70B-D332E6B48858</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>704FED2C-359D-4D38-9B41-A83FBA2E0A9A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>E43EA343-CCF1-4C4B-967B-CC00AB86DDEC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FD0931C4-1DD8-434F-A70B-D332E6B48858</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>53F39B0D-9C43-4E24-A373-E39CAA4845A7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -126,6 +178,141 @@ python3 gioGoogleAPI.py "2"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>18</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>1</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>6286DB17-C84B-4F43-8290-B1C0F928C7AB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>myFile</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>53F39B0D-9C43-4E24-A373-E39CAA4845A7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>!!ww</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>alfred-sheets</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>31D75F56-959F-411F-BC8A-8E29FC3D1086</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>checking...</string>
+				<key>script</key>
+				<string>export PYTHONPATH="$PWD/lib"
+python3 gioGoogleAPI.py "$myFile"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E44AD3EB-3F0D-41A4-B8FC-2B692625CE3F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>FD0931C4-1DD8-434F-A70B-D332E6B48858</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -137,6 +324,27 @@ python3 gioGoogleAPI.py "2"</string>
 			<real>585</real>
 			<key>ypos</key>
 			<real>110</real>
+		</dict>
+		<key>31D75F56-959F-411F-BC8A-8E29FC3D1086</key>
+		<dict>
+			<key>xpos</key>
+			<real>295</real>
+			<key>ypos</key>
+			<real>695</real>
+		</dict>
+		<key>53F39B0D-9C43-4E24-A373-E39CAA4845A7</key>
+		<dict>
+			<key>xpos</key>
+			<real>805</real>
+			<key>ypos</key>
+			<real>630</real>
+		</dict>
+		<key>6286DB17-C84B-4F43-8290-B1C0F928C7AB</key>
+		<dict>
+			<key>xpos</key>
+			<real>280</real>
+			<key>ypos</key>
+			<real>570</real>
 		</dict>
 		<key>704FED2C-359D-4D38-9B41-A83FBA2E0A9A</key>
 		<dict>
@@ -151,6 +359,20 @@ python3 gioGoogleAPI.py "2"</string>
 			<real>410</real>
 			<key>ypos</key>
 			<real>340</real>
+		</dict>
+		<key>E44AD3EB-3F0D-41A4-B8FC-2B692625CE3F</key>
+		<dict>
+			<key>xpos</key>
+			<real>875</real>
+			<key>ypos</key>
+			<real>715</real>
+		</dict>
+		<key>FD0931C4-1DD8-434F-A70B-D332E6B48858</key>
+		<dict>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>715</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
