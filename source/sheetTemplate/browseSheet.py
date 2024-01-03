@@ -20,10 +20,11 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 from google.oauth2 import service_account
+from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, MY_LAYOUT_S, my_numbers
 
 #myValue = sys.argv[2]
-#mySource = sys.argv[1]
-myURL = sys.argv[1]
+mySource = [1,2,3,4]
+#myURL = sys.argv[1]
 
 def log(s, *args):
     if args:
@@ -31,58 +32,6 @@ def log(s, *args):
     print(s, file=sys.stderr)
 
 
-def validateURL (myurl):
-    result = {"items": []}
-    if "docs.google.com/spreadsheets" not in myurl:
-        result["items"].append({
-        
-        "title": "⚠️ Not a Google Spreadsheet!",
-        "subtitle": myurl,
-        "arg": "",
-        "icon": {
-            "path": ""
-            }
-            })
-        print (json.dumps(result))
-    
-    else:
-        allSheets = get_sheet_list (myurl)
-        
-        result["items"].append({
-        "title": "👍 This is a Google Spreadsheet!",
-        "subtitle": myurl,
-        "arg": "",
-        "icon": {
-            "path": ""
-            }
-            })
-
-        if allSheets == "Permission Denied":
-            result["items"].append({
-                "title": "🛑 Permission denied!",
-                "subtitle": "check spreadsheet permissions",
-                "arg": "",
-                "icon": {
-                    "path": ""
-                    }
-            })
-
-        else:
-            for currSheet in allSheets: 
-                result["items"].append({
-                "title": f"Browse sheet: {currSheet}",
-            "subtitle": myurl,
-            "arg": currSheet,
-            "icon": {
-                "path": ""
-                }
-                })
-                
-        
-        print (json.dumps(result))
-        
-    
-    return None
 
 
 
@@ -145,44 +94,10 @@ def get_sheet_list(spreadsheet_url, creds_path='burattinaio-105c8840e188.json'):
 
 
 
-
-
-def fetchSheetProperties (myurl):
-
-    
-    # scopes = [
-    # 'https://www.googleapis.com/auth/spreadsheets',
-    # 'https://www.googleapis.com/auth/drive'
-    # ]
-    # credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
-    # #access the json key you downloaded earlier 
-
-    # file = gspread.authorize(credentials) # authenticate the JSON key with gspread
-    try:
-        
-        active_sheet_name = get_active_sheet_name(myurl)
-
-        if active_sheet_name:
-            log(f"The active sheet is: {active_sheet_name}")
-        else:
-            log("Failed to retrieve the active sheet name.")
-
-           
-    
-    except gspread.exceptions.SpreadsheetNotFound as e: 
-        log ("caz!! ========")
-    
-    #worksheet = sheet.worksheet("Read")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
-    
-    # Get all values from the worksheet
-    #all_values = worksheet.get_all_values()
-    # active_worksheet = sheet.worksheet(active_sheet_id)
-    # active_sheet_name = active_worksheet.title
-    return active_sheet_name
-    
     
 
-def fetchValues (mySource):
+
+def fetchValues (spreadsheet_url):
     result = {"items": []}
     scopes = [
     'https://www.googleapis.com/auth/spreadsheets',
@@ -193,90 +108,6 @@ def fetchValues (mySource):
 
     file = gspread.authorize(credentials) # authenticate the JSON key with gspread
     try:
-        sheet = file.open("My Audiobooks")  #open sheet
-        
-    
-    except gspread.exceptions.SpreadsheetNotFound as e: 
-        log ("caz!! ========")
-        resultErr= {"items": [{
-        "title": "Error ",
-        "subtitle": "Press Enter to check the instructions",
-        "arg": "",
-        "icon": {
-            "path": ""
-            }
-            }]}
-        print (json.dumps(resultErr))
-
-        sys.exit(1)
-
-    worksheet = sheet.worksheet("Read")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
-    # Get all values from the worksheet
-    all_values = worksheet.get_all_values()
-    
-    
-    # Extract column headers (assuming the first row contains column headers)
-    column_headers = all_values[0]
-
-    # Create a list to store dictionaries representing each row
-    rows_as_list_of_dictionaries = []
-
-       # Iterate through each row (excluding the header row) and create a dictionary
-    for row in all_values[1:]:
-        row_dict = {}
-        for column_number in mySource:
-            if 1 <= column_number <= len(column_headers):
-                column_name = column_headers[column_number - 1]
-                row_dict[column_name] = row[column_number - 1]
-        rows_as_list_of_dictionaries.append(row_dict)
-
-    log (rows_as_list_of_dictionaries)
-    
-    for myRow in rows_as_list_of_dictionaries:
-        
-
-        result["items"].append({
-                "title": f"{myRow['Title']} ({myRow['Author']})",
-                'subtitle': myRow['Year'],
-                'valid': True,
-                
-            "mods": {
-                    "alt": {
-                        "valid": True,
-                        "arg": "alfredapp.com/powerpack/",
-                        "subtitle": "https://www.alfredapp.com/powerpack/"
-                        },
-                "cmd": {
-                    "valid": True,
-                    "arg": "alfredapp.com/shop/",
-                    "subtitle": "https://www.alfredapp.com/shop/"
-                        },
-                "cmd+alt": {
-                        "valid": True,
-                        "arg": "alfredapp.com/blog/",
-                        "subtitle": "https://www.alfredapp.com/blog/"
-                        },
-                },
-                "icon": {
-                    "path": 'icon.png'
-                },
-                'arg': "resultString"
-                    }) 
-    print (json.dumps(result))  
-
-def fetchValuesPublic (mySource):
-    result = {"items": []}
-    scopes = [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive'
-    ]
-    credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
-    #access the json key you downloaded earlier 
-
-    file = gspread.authorize(credentials) # authenticate the JSON key with gspread
-    try:
-        #sheet = file.open("My Audiobooks")  #open sheet
-        spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1ZW6TlsuGv7oQFEv8sryubIzYyQ8OFebY_1or7TYzrdY/edit#gid=1827593641'
         sheet = file.open_by_url(spreadsheet_url)
     
     except gspread.exceptions.SpreadsheetNotFound as e: 
@@ -293,19 +124,21 @@ def fetchValuesPublic (mySource):
 
         sys.exit(1)
 
-    worksheet = sheet.worksheet("Calories per 100g")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+    worksheet = sheet.worksheet(MY_SHEET) 
+    
     # Get all values from the worksheet
     all_values = worksheet.get_all_values()
-    all_values = all_values[1:]
+    #all_values = all_values[1:]
     
     # Extract column headers (assuming the first row contains column headers)
-    column_headers = all_values[0]
+    column_headers = all_values[HEADER_ROW]
+    #log (column_headers)
 
     # Create a list to store dictionaries representing each row
     rows_as_list_of_dictionaries = []
 
        # Iterate through each row (excluding the header row) and create a dictionary
-    for row in all_values[1:]:
+    for row in all_values[HEADER_ROW+1:]:
         row_dict = {}
         for column_number in mySource:
             if 1 <= column_number <= len(column_headers):
@@ -313,14 +146,18 @@ def fetchValuesPublic (mySource):
                 row_dict[column_name] = row[column_number - 1]
         rows_as_list_of_dictionaries.append(row_dict)
 
-    log (rows_as_list_of_dictionaries)
+    #log (rows_as_list_of_dictionaries)
     
     for myRow in rows_as_list_of_dictionaries:
-        
+        #log (myRow)
+        if MY_LAYOUT_S:
+            myTitle = MY_LAYOUT_S.format(0)
+        else:
+            myTitle = f"{myRow[column_headers[TITLE_COLUMN]]}"
 
         result["items"].append({
-                "title": f"{myRow['Name']} ({myRow['Calories per serving']})",
-                'subtitle': "myRow['']",
+                "title": myTitle,
+                'subtitle': f"{myRow[column_headers[SUBTITLE_COLUMN]]}",
                 'valid': True,
                 
             "mods": {
@@ -343,7 +180,7 @@ def fetchValuesPublic (mySource):
                 "icon": {
                     "path": 'icon.png'
                 },
-                'arg': "resultString"
+                'arg': f"{myRow[column_headers[ARG_COLUMN]]}"
                     }) 
     print (json.dumps(result))  
 
@@ -361,7 +198,7 @@ def main ():
 
     # if sheet_data is not None:
     #     log(sheet_data)
-    validateURL(myURL)
+    fetchValues(MY_URL)
 
 
 

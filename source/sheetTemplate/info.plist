@@ -7,7 +7,21 @@
 	<key>category</key>
 	<string>Productivity</string>
 	<key>connections</key>
-	<dict/>
+	<dict>
+		<key>0443C1B7-C877-403A-9909-D52A574ADF36</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
 	<key>createdby</key>
 	<string>giovanni</string>
 	<key>description</key>
@@ -22,7 +36,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -34,7 +48,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>wwg</string>
+				<string>{var:MAIN_KEYWORD}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -44,10 +58,10 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>wait wait wait</string>
 				<key>script</key>
 				<string>export PYTHONPATH="$PWD/lib"
-python3 gioGoogleAPI.py "2"</string>
+python3 browseSheet.py "2"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -68,6 +82,27 @@ python3 gioGoogleAPI.py "2"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -80,11 +115,186 @@ python3 gioGoogleAPI.py "2"</string>
 			<key>ypos</key>
 			<real>110</real>
 		</dict>
+		<key>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</key>
+		<dict>
+			<key>xpos</key>
+			<real>900</real>
+			<key>ypos</key>
+			<real>110</real>
+		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variablesdontexport</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>@@@</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Main Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>MAIN_KEYWORD</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Spreadsheet URL</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>MY_URL</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>1</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Row number</string>
+			<key>label</key>
+			<string>Header Row</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>HEADER_ROW</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Sheet1</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Sheet</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>MY_SHEET</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>1</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Title column</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>TITLE_COLUMN</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>2</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Subtitle column</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>SUBTITLE_COLUMN</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Argument column</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>ARG_COLUMN</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>3</integer>
+			</dict>
+			<key>description</key>
+			<string>Title: [1]
+if set, will override the three fields above</string>
+			<key>label</key>
+			<string>Advanced: Custom Layout</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>MY_LAYOUT</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
