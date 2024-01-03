@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "burattinaio",
+  "private_key_id": "105c8840e188d9faf94beebd57d12f4217b8e95e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCfAYmSoFRUgRtH\nMe/6/s7u/0nSEig9i8Obm0rF0d1dwyoOvTuiRNbE5QbmYe5d38uLz2fDglFkmDtH\nLLvlrQHQFsgQRZ9JZi28kWS9J/1qZYOn2f/Ii0O370P0+axntJMzhx2O+YHljs0Q\npk3hBGEX9R0QPE23h88g1PfIMUDqSaZM2cOtpjWr4QyRoi0IBXf5CrCwHy5VLvNN\ni6g14VEVsP6jj0FhdsS7K48FmKe2swV+QnIzHhgt0ChpXxaFDhMYHin/ZI73RZKs\nvOmn0vHfXcCCERiMpZYzs4gWdqH+ycDSkpR0x7x0MZc8+hHGoI8cOFJEKvDnirwW\nX1q1an8bAgMBAAECggEACkB9n8QRm981JIp+OBcsvXEdT9uW150G0CYblJSa6rw2\nHnwp96TrmgdQQhNnXIsc4xdMz+i7mbpM/CJQvRbCCqolXRM4GXHqmgFf1uhYqP8B\nlZVzLfl4tMfLAGUGrisQ4J4iFEFXFDd4Vk36sHrpTbOim5Tfx+kMPEgu76vpTRG3\nc86hXPNG13HBC4CnqLGR1yLftkSGVY+NsCXER+qJUgaMqcp7AH0PJfnK935pJB5H\n0L9bndrj/vnQzQIMEKqCFaAkHJFcFIO2r8muQvPBv2refX+R+vqjEVyoja40JJEq\nvfOC0zzmmcAJ2cbrn8wUuOa2wz2/EE+Ll7wchYeugQKBgQDdVc9OZtRlW1u8VASt\nNFSTxGAWxRq5III28gVKGgsvQxUWlK19sWjCqtA9S+nGD4Lq9TmB28QrU17CPZmW\nv//IaFoffK7gFNxCTKbMC1ZWHK7sVOk7ZAJmGNbFlUuHgg1jI7/oypm4IT9gUVCY\nDSYf8aVaP2tds86F5sA3XIuNgQKBgQC36LUlDsz6xVotil0eU0Snsxfnq3Mrf93y\nFXYqY4TfuKBJlCD/NsLA9rPlt0wmmLaDtVeONi5IdxiBO5Aeo8pcfYcMYETlY0mG\ncmvW/e+V9s8QvRnXAaTpZx/kgJPGIxzMPhcNxC/noMnzMr3Wfx93Il5m3FaAwCng\nI5VOztjSmwKBgB2mIAYFmlAVg91fd9zn1KiStrh2INVJuIe5teGuSW9EUi/bLL5Y\npIrnLMv5PlCMxWHKBbESil2vZlMow0lBYPcsm136asaTpMmw0OsmXaNdZkU8Pp35\nEKUykJqZHCwDzN1J7aw2b48NzRqO6ffkUwYWbasAMda0fmbLeVYxLHSBAoGAblNA\nj+mQGAPaNCWj9PQ45G1wsr7MiVTcvUQYrhcjd95W8azWGqQsMvwMMYtDOIg2PU7F\nJn/kRf6ECcrEi0zwsYlwQYFi80Ubr3bmsIOHfawgzcbTQIMw/f+qRzbG737S4MeC\npvSBVG/FlopjDdEW/C32+bfGgNhGhrpx8GPv+G8CgYAOxIl8f1lv2b/qrFVplFYY\nD3t7HtMhoGu39Ogtdpq/o5aUYmNrGxixFxtuyDQ/qEea7Hrv20HDeoUUxZtt7O+o\npuB/0QII7ZQoTgn2xzhJnShe5VfnRMsWqtiJKefFyNVzwhN5xs4qbj+G03Hs1KnI\nSsl+N/scpEp4tJ6DOZDRkQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "giovanniscript@burattinaio.iam.gserviceaccount.com",
+  "client_id": "100020596045533085307",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/giovanniscript%40burattinaio.iam.gserviceaccount.com"
+}
