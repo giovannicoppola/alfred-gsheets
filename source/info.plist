@@ -51,7 +51,20 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E43EA343-CCF1-4C4B-967B-CC00AB86DDEC</string>
+				<string>35E5B69C-081F-4B18-99BF-A34975F39873</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E44AD3EB-3F0D-41A4-B8FC-2B692625CE3F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8806EA40-F57A-46EC-991C-DC63CA7B0EF6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -131,6 +144,53 @@ python3 gioGoogleAPI.py "2"</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>0443C1B7-C877-403A-9909-D52A574ADF36</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>python3 cloneSheets.py</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>35E5B69C-081F-4B18-99BF-A34975F39873</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -313,6 +373,53 @@ python3 gioGoogleAPI.py "$myFile"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>python3 cloneSheets.py</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>8806EA40-F57A-46EC-991C-DC63CA7B0EF6</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -331,6 +438,13 @@ python3 gioGoogleAPI.py "$myFile"</string>
 			<real>295</real>
 			<key>ypos</key>
 			<real>695</real>
+		</dict>
+		<key>35E5B69C-081F-4B18-99BF-A34975F39873</key>
+		<dict>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>320</real>
 		</dict>
 		<key>53F39B0D-9C43-4E24-A373-E39CAA4845A7</key>
 		<dict>
@@ -352,6 +466,13 @@ python3 gioGoogleAPI.py "$myFile"</string>
 			<real>160</real>
 			<key>ypos</key>
 			<real>335</real>
+		</dict>
+		<key>8806EA40-F57A-46EC-991C-DC63CA7B0EF6</key>
+		<dict>
+			<key>xpos</key>
+			<real>1125</real>
+			<key>ypos</key>
+			<real>715</real>
 		</dict>
 		<key>E43EA343-CCF1-4C4B-967B-CC00AB86DDEC</key>
 		<dict>

@@ -12,7 +12,7 @@ import shutil
 import uuid
 from config import log, ALFRED_WORKFLOW_DIR
 import plistlib
-
+import json
 
 
 def write_plist_file(file_path, data):
@@ -23,7 +23,28 @@ def write_plist_file(file_path, data):
         print(f"Changes written to '{file_path}' successfully.")
     except Exception as e:
         print(f"Error: Unable to write to '{file_path}'. {e}")
-        
+
+def plist2JSON (myPlistFile,myJSONFile):
+    with open(myPlistFile, 'rb') as plist_file:
+        plist_data = plistlib.load(plist_file)
+    
+    json_data = json.dumps(plist_data, indent = 4)
+
+    with open(myJSONFile, 'w') as json_file:
+        json_file.write(json_data)
+    
+    return plist_data
+
+
+def json2plist(json_data, myPlistFile):
+    
+    with open(myPlistFile, 'wb') as plist_file:
+        plistlib.dump(json_data, plist_file, fmt=plistlib.FMT_XML)  # FMT_XML for XML format
+
+
+
+
+
 def cloneWorkflow():
     # Generate a random UUID string
     random_string = str(uuid.uuid4())
@@ -57,6 +78,32 @@ def cloneWorkflow():
     log(f"New folder '{new_folder_name}' created, and files/directories copied successfully.")
 
 
+def printDone ():
+    result = {"items": []}
+            
+    result["items"].append({
+            "title": "Done!",
+            'subtitle': "mySubTitle" ,
+            'valid': True,
+            "variables": {
+                "URL_CHECK": "URL_CHECK"
+                    },
+            
+            "icon": {
+                "path": 'icon.png'
+            },
+            'arg': "myArg" 
+                }) 
+    print (json.dumps(result))  
+
+
 
 if __name__ == "__main__":
-    cloneWorkflow()
+    #cloneWorkflow()
+    myData = plist2JSON ("sheetTemplate/info.plist","sheetTemplate/infoplist.json")
+    #myData ['bundleid'] = 'cazacazacaza'
+    json2plist (myData,"sheetTemplate/info.plist")
+
+    myPrefs = plist2JSON ("sheetTemplate/prefs.plist","sheetTemplate/prefsplist.json")
+    printDone()
+

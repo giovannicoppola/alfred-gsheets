@@ -1,0 +1,228 @@
+{
+    "bundleid": "cazacazacaza",
+    "category": "Productivity",
+    "connections": {
+        "0443C1B7-C877-403A-9909-D52A574ADF36": [
+            {
+                "destinationuid": "8AF507E8-A199-4C20-94E1-C88C059F2D12",
+                "modifiers": 0,
+                "modifiersubtext": "",
+                "vitoclose": false
+            },
+            {
+                "destinationuid": "D972334E-D38E-4740-A254-C30B2D2AEE5E",
+                "modifiers": 262144,
+                "modifiersubtext": "Copy argument to clipboard",
+                "vitoclose": false
+            }
+        ],
+        "8AF507E8-A199-4C20-94E1-C88C059F2D12": [
+            {
+                "destinationuid": "EA194C6E-1CB2-4841-992D-DE140BDBC9F6",
+                "modifiers": 0,
+                "modifiersubtext": "",
+                "sourceoutputuid": "731E752E-A052-4211-ADCC-A2BB39C5D50E",
+                "vitoclose": false
+            },
+            {
+                "destinationuid": "D972334E-D38E-4740-A254-C30B2D2AEE5E",
+                "modifiers": 0,
+                "modifiersubtext": "",
+                "vitoclose": false
+            }
+        ]
+    },
+    "createdby": "giovanni",
+    "description": "",
+    "disabled": false,
+    "name": "alfred-sheets - template",
+    "objects": [
+        {
+            "config": {
+                "browser": "",
+                "skipqueryencode": false,
+                "skipvarencode": false,
+                "spaces": "",
+                "url": ""
+            },
+            "type": "alfred.workflow.action.openurl",
+            "uid": "EA194C6E-1CB2-4841-992D-DE140BDBC9F6",
+            "version": 1
+        },
+        {
+            "config": {
+                "alfredfiltersresults": true,
+                "alfredfiltersresultsmatchmode": 0,
+                "argumenttreatemptyqueryasnil": true,
+                "argumenttrimmode": 0,
+                "argumenttype": 1,
+                "escaping": 102,
+                "keyword": "{var:MAIN_KEYWORD}",
+                "queuedelaycustom": 3,
+                "queuedelayimmediatelyinitially": true,
+                "queuedelaymode": 0,
+                "queuemode": 1,
+                "runningsubtext": "wait wait wait",
+                "script": "export PYTHONPATH=\"$PWD/lib\"\npython3 browseSheet.py \"2\"",
+                "scriptargtype": 1,
+                "scriptfile": "",
+                "subtext": "",
+                "title": "Sheet List",
+                "type": 11,
+                "withspace": true
+            },
+            "type": "alfred.workflow.input.scriptfilter",
+            "uid": "0443C1B7-C877-403A-9909-D52A574ADF36",
+            "version": 3
+        },
+        {
+            "config": {
+                "conditions": [
+                    {
+                        "inputstring": "{var:URL_CHECK}",
+                        "matchcasesensitive": false,
+                        "matchmode": 0,
+                        "matchstring": "yes",
+                        "outputlabel": "Open URL",
+                        "uid": "731E752E-A052-4211-ADCC-A2BB39C5D50E"
+                    }
+                ],
+                "elselabel": "else",
+                "hideelse": false
+            },
+            "type": "alfred.workflow.utility.conditional",
+            "uid": "8AF507E8-A199-4C20-94E1-C88C059F2D12",
+            "version": 1
+        },
+        {
+            "config": {
+                "autopaste": false,
+                "clipboardtext": "{query}",
+                "ignoredynamicplaceholders": false,
+                "transient": false
+            },
+            "type": "alfred.workflow.output.clipboard",
+            "uid": "D972334E-D38E-4740-A254-C30B2D2AEE5E",
+            "version": 3
+        }
+    ],
+    "readme": "",
+    "uidata": {
+        "0443C1B7-C877-403A-9909-D52A574ADF36": {
+            "xpos": 155.0,
+            "ypos": 130.0
+        },
+        "8AF507E8-A199-4C20-94E1-C88C059F2D12": {
+            "xpos": 425.0,
+            "ypos": 160.0
+        },
+        "D972334E-D38E-4740-A254-C30B2D2AEE5E": {
+            "xpos": 620.0,
+            "ypos": 305.0
+        },
+        "EA194C6E-1CB2-4841-992D-DE140BDBC9F6": {
+            "xpos": 620.0,
+            "ypos": 125.0
+        }
+    },
+    "userconfigurationconfig": [
+        {
+            "config": {
+                "default": "@@@",
+                "placeholder": "",
+                "required": true,
+                "trim": true
+            },
+            "description": "",
+            "label": "Main Keyword",
+            "type": "textfield",
+            "variable": "MAIN_KEYWORD"
+        },
+        {
+            "config": {
+                "default": "",
+                "placeholder": "",
+                "required": true,
+                "trim": true
+            },
+            "description": "",
+            "label": "Spreadsheet URL",
+            "type": "textfield",
+            "variable": "MY_URL"
+        },
+        {
+            "config": {
+                "default": "1",
+                "placeholder": "",
+                "required": false,
+                "trim": true
+            },
+            "description": "Row number",
+            "label": "Header Row",
+            "type": "textfield",
+            "variable": "HEADER_ROW"
+        },
+        {
+            "config": {
+                "default": "Sheet1",
+                "placeholder": "",
+                "required": true,
+                "trim": true
+            },
+            "description": "",
+            "label": "Sheet",
+            "type": "textfield",
+            "variable": "MY_SHEET"
+        },
+        {
+            "config": {
+                "default": "1",
+                "placeholder": "",
+                "required": true,
+                "trim": true
+            },
+            "description": "",
+            "label": "Title column",
+            "type": "textfield",
+            "variable": "TITLE_COLUMN"
+        },
+        {
+            "config": {
+                "default": "2",
+                "placeholder": "",
+                "required": true,
+                "trim": true
+            },
+            "description": "",
+            "label": "Subtitle column",
+            "type": "textfield",
+            "variable": "SUBTITLE_COLUMN"
+        },
+        {
+            "config": {
+                "default": "",
+                "placeholder": "",
+                "required": false,
+                "trim": true
+            },
+            "description": "",
+            "label": "Argument column",
+            "type": "textfield",
+            "variable": "ARG_COLUMN"
+        },
+        {
+            "config": {
+                "default": "",
+                "required": false,
+                "trim": true,
+                "verticalsize": 3
+            },
+            "description": "Title: [1]\nif set, will override the three fields above",
+            "label": "Advanced: Custom Layout",
+            "type": "textarea",
+            "variable": "MY_LAYOUT"
+        }
+    ],
+    "version": "",
+    "webaddress": ""
+}

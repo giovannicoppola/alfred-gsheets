@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>giovanni-sheets-template</string>
+	<string>cazacazacaza</string>
 	<key>category</key>
 	<string>Productivity</string>
 	<key>connections</key>
@@ -12,7 +12,42 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>8AF507E8-A199-4C20-94E1-C88C059F2D12</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D972334E-D38E-4740-A254-C30B2D2AEE5E</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Copy argument to clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8AF507E8-A199-4C20-94E1-C88C059F2D12</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>731E752E-A052-4211-ADCC-A2BB39C5D50E</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D972334E-D38E-4740-A254-C30B2D2AEE5E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -32,6 +67,27 @@
 	<string>alfred-sheets - template</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -85,23 +141,53 @@ python3 browseSheet.py "2"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:URL_CHECK}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>yes</string>
+						<key>outputlabel</key>
+						<string>Open URL</string>
+						<key>uid</key>
+						<string>731E752E-A052-4211-ADCC-A2BB39C5D50E</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</string>
+			<string>8AF507E8-A199-4C20-94E1-C88C059F2D12</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>D972334E-D38E-4740-A254-C30B2D2AEE5E</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -111,16 +197,30 @@ python3 browseSheet.py "2"</string>
 		<key>0443C1B7-C877-403A-9909-D52A574ADF36</key>
 		<dict>
 			<key>xpos</key>
-			<real>585</real>
+			<real>155.0</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>130.0</real>
+		</dict>
+		<key>8AF507E8-A199-4C20-94E1-C88C059F2D12</key>
+		<dict>
+			<key>xpos</key>
+			<real>425.0</real>
+			<key>ypos</key>
+			<real>160.0</real>
+		</dict>
+		<key>D972334E-D38E-4740-A254-C30B2D2AEE5E</key>
+		<dict>
+			<key>xpos</key>
+			<real>620.0</real>
+			<key>ypos</key>
+			<real>305.0</real>
 		</dict>
 		<key>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</key>
 		<dict>
 			<key>xpos</key>
-			<real>900</real>
+			<real>620.0</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>125.0</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

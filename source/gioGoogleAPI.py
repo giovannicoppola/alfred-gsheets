@@ -72,7 +72,7 @@ def validateURL (myurl):
                 result["items"].append({
                 "title": f"Browse sheet: {currSheet}",
             "subtitle": myurl,
-            "arg": currSheet,
+            "arg": "",
             "icon": {
                 "path": ""
                 }
@@ -130,9 +130,11 @@ def get_sheet_list(spreadsheet_url, creds_path='burattinaio-105c8840e188.json'):
 
         # Get all sheets
         all_sheets = spreadsheet.worksheets()
+        sheetTitle = spreadsheet.title
         # Print the names of each worksheet
         sheet_names = [worksheet.title for worksheet in all_sheets]
         log(f"Sheet names:{sheet_names}")
+        log (f"sheet title: {sheetTitle}")
 
         
         return sheet_names

@@ -1,6 +1,9 @@
 #!/usr/local/bin/python3
 # encoding: utf-8
 
+# Overcast ☁️   🌡️+40°F (feels +34°F, 55%) 🌬️↘6mph 🌗&m Wed Jan  3 18:13:05 2024
+# W1Q1 – 3 ➡️ 362 – 237 ❇️ 128
+
 ### entering values into a google sheet using a python script (which I can then launch from Alfred)
 ### Saturday, June 5, 2021, 8:32 PM
 ## 
@@ -17,10 +20,12 @@
 
 import sys
 import gspread
+import re
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 from google.oauth2 import service_account
-from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, MY_LAYOUT_S, my_numbers
+from urllib.parse import urlparse
+from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, LAYOUT_LIST
 
 #myValue = sys.argv[2]
 mySource = [1,2,3,4]
@@ -93,8 +98,29 @@ def get_sheet_list(spreadsheet_url, creds_path='burattinaio-105c8840e188.json'):
 
 
 
-
+def replace_fields(original_string, series_list,column_headers):
+    # Find all occurrences of "[index]" in the original string
+    placeholders = [int(index) for index in re.findall(r'\[(\d+)\]', original_string)]
     
+    # Replace each placeholder with the corresponding value from the series_list
+    replaced_string = original_string
+    for index in placeholders:
+        if 0 <= index < len(series_list):
+            replaced_string = replaced_string.replace(f'[{index}]', str(series_list[column_headers[index-1]]))
+
+    return replaced_string
+
+
+
+
+def is_valid_url(url):
+    try:
+        result = urlparse(url)
+        return all([result.scheme, result.netloc])  # Check if both scheme and netloc are present
+    except ValueError:
+        return False  # Invalid URL format
+
+
 
 
 def fetchValues (spreadsheet_url):
@@ -150,37 +176,34 @@ def fetchValues (spreadsheet_url):
     
     for myRow in rows_as_list_of_dictionaries:
         #log (myRow)
-        if MY_LAYOUT_S:
-            myTitle = MY_LAYOUT_S.format(0)
+        if LAYOUT_LIST:
+            myTitle = replace_fields(LAYOUT_LIST[0],myRow,column_headers)
+            mySubTitle = replace_fields(LAYOUT_LIST[1],myRow,column_headers)
+            myArg = replace_fields(LAYOUT_LIST[2],myRow,column_headers)
         else:
             myTitle = f"{myRow[column_headers[TITLE_COLUMN]]}"
+            mySubTitle = f"{myRow[column_headers[SUBTITLE_COLUMN]]}"
+            myArg = f"{myRow[column_headers[ARG_COLUMN]]}"
 
+        
+        if is_valid_url(myArg):
+            URL_CHECK = 'yes'
+        else:
+            URL_CHECK = 'no'
+            
+        
         result["items"].append({
                 "title": myTitle,
-                'subtitle': f"{myRow[column_headers[SUBTITLE_COLUMN]]}",
+                'subtitle': mySubTitle ,
                 'valid': True,
+                "variables": {
+                    "URL_CHECK": URL_CHECK
+                        },
                 
-            "mods": {
-                    "alt": {
-                        "valid": True,
-                        "arg": "alfredapp.com/powerpack/",
-                        "subtitle": "https://www.alfredapp.com/powerpack/"
-                        },
-                "cmd": {
-                    "valid": True,
-                    "arg": "alfredapp.com/shop/",
-                    "subtitle": "https://www.alfredapp.com/shop/"
-                        },
-                "cmd+alt": {
-                        "valid": True,
-                        "arg": "alfredapp.com/blog/",
-                        "subtitle": "https://www.alfredapp.com/blog/"
-                        },
-                },
                 "icon": {
                     "path": 'icon.png'
                 },
-                'arg': f"{myRow[column_headers[ARG_COLUMN]]}"
+                'arg': myArg 
                     }) 
     print (json.dumps(result))  
 
@@ -206,33 +229,3 @@ if __name__ == '__main__':
     main ()
 
 
-
-"""
-def download_column(sheet_name, column_name):
-    # Your Google Sheets API credentials JSON file path
-    credentials_file = 'path/to/your/credentials.json'
-
-    # Scope for accessing Google Sheets
-    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-
-    # Authenticate with Google Sheets API
-    creds = ServiceAccountCredentials.from_json_keyfile_name(credentials_file, scope)
-    client = gspread.authorize(creds)
-
-    # Open the specified Google Sheet
-    sheet = client.open(sheet_name)
-
-    # Select the first worksheet (index 0) or specify a specific worksheet by title.
-    worksheet = sheet.get_worksheet(0)
-
-    # Get the values from the specified column
-    column = worksheet.col_values(ord(column_name.upper()) - 64)  # Converts column letter to number (A=1, B=2, ..., Z=26)
-
-    return column
-
-# Replace 'Your_Sheet_Name' with the name of your Google Sheet and 'A' with the column letter you want to download.
-column_data = download_column('Your_Sheet_Name', 'A')
-print(column_data)
-
-
-"""
