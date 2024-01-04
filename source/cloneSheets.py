@@ -15,6 +15,8 @@ import plistlib
 import json
 
 
+
+
 def write_plist_file(file_path, data):
     try:
         # Open the .plist file in binary mode and write the data
@@ -98,12 +100,14 @@ def printDone ():
 
 
 
+
 if __name__ == "__main__":
     #cloneWorkflow()
     myData = plist2JSON ("sheetTemplate/info.plist","sheetTemplate/infoplist.json")
     #myData ['bundleid'] = 'cazacazacaza'
     json2plist (myData,"sheetTemplate/info.plist")
-
+    
+    
     myPrefs = plist2JSON ("sheetTemplate/prefs.plist","sheetTemplate/prefsplist.json")
     printDone()
 

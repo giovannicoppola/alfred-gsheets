@@ -1,6 +1,6 @@
 {
-    "MAIN_KEYWORD": "caz",
-    "MY_LAYOUT": "Title: \"caz [1] \"and caz\" [2] \u2705 maybe [3]\"\nSubtitle: \"fdsf [3]\"\nArg: \"[1]\"",
-    "MY_SHEET": "Sheet12",
-    "MY_URL": "https://docs.google.com/spreadsheets/d/1JUUkxXz6MJ56CcIkeqhv8C9q39sg3sSvGIwRsTk6kkM/edit#gid=0"
+    "ARG_COLUMN": "2",
+    "MY_LAYOUT": "testcaz [10]",
+    "MY_URL": "https://docs.google.com/spreadsheets/d/1JUUkxXz6MJ56CcIkeqhv8C9q39sg3sSvGIwRsTk6kkM/edit#gid=0",
+    "SUBTITLE_COLUMN": "3"
 }
