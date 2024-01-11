@@ -14,6 +14,7 @@ ALFRED_PREFS = os.getenv('alfred_preferences')
 ALFRED_WORKFLOW_DIR = f'{ALFRED_PREFS}/workflows'
 
 MY_URL = os.path.expanduser(os.getenv('MY_URL', ''))
+KEYFILE = os.path.expanduser(os.getenv('KEYFILE', ''))
 MY_SHEET = os.path.expanduser(os.getenv('MY_SHEET', ''))
 
 HEADER_ROW = int(os.path.expanduser(os.getenv('HEADER_ROW', ''))) - 1

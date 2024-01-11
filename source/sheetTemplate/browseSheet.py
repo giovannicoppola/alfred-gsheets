@@ -25,7 +25,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import json
 from google.oauth2 import service_account
 from urllib.parse import urlparse
-from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, LAYOUT_LIST
+from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, LAYOUT_LIST,KEYFILE
 
 #myValue = sys.argv[2]
 mySource = [1,2,3,4]
@@ -45,7 +45,7 @@ def addValue (myValue,mySource):
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive'
     ]
-    credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(KEYFILE, scopes) 
     #access the json key you downloaded earlier 
 
     file = gspread.authorize(credentials) # authenticate the JSON key with gspread
@@ -69,7 +69,7 @@ def addValue (myValue,mySource):
 
 
 
-def get_sheet_list(spreadsheet_url, creds_path='burattinaio-105c8840e188.json'):
+def get_sheet_list(spreadsheet_url, creds_path=KEYFILE):
     try:
         # Authenticate with Google Sheets using credentials
         creds = service_account.Credentials.from_service_account_file(
@@ -129,7 +129,7 @@ def fetchValues (spreadsheet_url):
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive'
     ]
-    credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(KEYFILE, scopes) 
     #access the json key you downloaded earlier 
 
     file = gspread.authorize(credentials) # authenticate the JSON key with gspread
