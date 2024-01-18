@@ -41,7 +41,7 @@ def validateURL (myurl):
     if "docs.google.com/spreadsheets" not in myurl:
         result["items"].append({
         
-        "title": "⚠️ Not a Google Spreadsheet!",
+        "title": "⚠️ Not a Google Sheet!",
         "subtitle": myurl,
         "arg": "",
         "icon": {
@@ -60,7 +60,7 @@ def validateURL (myurl):
             writeP = "❌"
             writeS = ''
         result["items"].append({
-        "title": "👍 This is a Google Spreadsheet!",
+        "title": "👍 This is a Google Sheet!",
         "subtitle": f"{sheetTitle} – Reading: ✅, Writing = {writeP}",
         "arg": "",
         "icon": {
