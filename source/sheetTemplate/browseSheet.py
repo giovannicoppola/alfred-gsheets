@@ -25,46 +25,13 @@ from oauth2client.service_account import ServiceAccountCredentials
 import json
 from google.oauth2 import service_account
 from urllib.parse import urlparse
-from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, LAYOUT_LIST,KEYFILE
+from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, LAYOUT_LIST,KEYFILE, log
 
 #myValue = sys.argv[2]
 mySource = [1,2,3,4]
 #myURL = sys.argv[1]
 
-def log(s, *args):
-    if args:
-        s = s % args
-    print(s, file=sys.stderr)
 
-
-
-
-
-def addValue (myValue,mySource):
-    scopes = [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive'
-    ]
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(KEYFILE, scopes) 
-    #access the json key you downloaded earlier 
-
-    file = gspread.authorize(credentials) # authenticate the JSON key with gspread
-    sheet = file.open("Chiatto")  #open sheet
-    worksheet = sheet.worksheet("weight")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
-
-    #firstRow = len(worksheet.col_values(0))
-    lastrow = len(worksheet.col_values(mySource))
-    lastrow = lastrow+1
-    worksheet.update_cell(lastrow, mySource, myValue)
-
-
-    #worksheet.update(['Test1'], range='B2:L6')
-
-    #all_cells = sheet.range('A1:C6')
-    #print(all_cells)
-
-    #A1 = worksheet.acell('B2').value
-    #print(A1)
 
 
 

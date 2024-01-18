@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3
-# encoding: utf-8
+
 
 ### entering values into a google sheet using a python script (which I can then launch from Alfred)
 ### Saturday, June 5, 2021, 8:32 PM
@@ -20,18 +20,23 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 from google.oauth2 import service_account
+import httplib2
+from googleapiclient.discovery import build
+import re
 
-#myValue = sys.argv[2]
-#mySource = sys.argv[1]
+
+
 myURL = sys.argv[1]
 
-def log(s, *args):
-    if args:
-        s = s % args
-    print(s, file=sys.stderr)
+from config import log, KEYFILE
+
 
 
 def validateURL (myurl):
+    """
+    a function to validate the selected URL, list sheets, and check writing permissions
+    """
+
     result = {"items": []}
     if "docs.google.com/spreadsheets" not in myurl:
         result["items"].append({
@@ -46,11 +51,17 @@ def validateURL (myurl):
         print (json.dumps(result))
     
     else:
-        allSheets = get_sheet_list (myurl)
-        
+        sheetTitle, allSheets = get_sheet_list (myurl)
+        writePermissions = checkPermissions (myURL)
+        if writePermissions:
+            writeP = "✅"
+            writeS = ' and edit'
+        else:
+            writeP = "❌"
+            writeS = ''
         result["items"].append({
         "title": "👍 This is a Google Spreadsheet!",
-        "subtitle": myurl,
+        "subtitle": f"{sheetTitle} – Reading: ✅, Writing = {writeP}",
         "arg": "",
         "icon": {
             "path": ""
@@ -70,11 +81,11 @@ def validateURL (myurl):
         else:
             for currSheet in allSheets: 
                 result["items"].append({
-                "title": f"Browse sheet: {currSheet}",
-            "subtitle": myurl,
+                "title": f"Clone alfred-sheets to browse{writeS}: {currSheet}",
+            "subtitle": f"{sheetTitle} ▶️ {currSheet}",
             "arg": "",
             "icon": {
-                "path": ""
+                "path": "icons/cloneIcon.png"
                 }
                 })
                 
@@ -86,32 +97,31 @@ def validateURL (myurl):
 
 
 
-def addValue (myValue,mySource):
-    scopes = [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive'
-    ]
-    credentials = ServiceAccountCredentials.from_json_keyfile_name("burattinaio-105c8840e188.json", scopes) 
-    #access the json key you downloaded earlier 
+def checkPermissions (myURL):
+        
+    file_id = re.search(r"/d/([^/]*)/", myURL).group(1)  # Extract file ID from URL
+    
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(KEYFILE, ["https://www.googleapis.com/auth/drive"])
+    http = credentials.authorize(httplib2.Http())
+    service = build("drive", "v3", http=http)
 
-    file = gspread.authorize(credentials) # authenticate the JSON key with gspread
-    sheet = file.open("Chiatto")  #open sheet
-    worksheet = sheet.worksheet("weight")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+    
+    try:
+        permissions = service.permissions().list(fileId=file_id).execute()
+        
+        for permission in permissions["permissions"]:
+        
+            if permission["role"] == "writer":
+                writePermissions = True
+                break
+            
+        else:
+            writePermissions = False
 
-    #firstRow = len(worksheet.col_values(0))
-    lastrow = len(worksheet.col_values(mySource))
-    lastrow = lastrow+1
-    worksheet.update_cell(lastrow, mySource, myValue)
-
-
-    #worksheet.update(['Test1'], range='B2:L6')
-
-    #all_cells = sheet.range('A1:C6')
-    #print(all_cells)
-
-    #A1 = worksheet.acell('B2').value
-    #print(A1)
-
+    except:
+        writePermissions = False
+    
+    return writePermissions
 
 
 
@@ -137,11 +147,11 @@ def get_sheet_list(spreadsheet_url, creds_path='burattinaio-105c8840e188.json'):
         log (f"sheet title: {sheetTitle}")
 
         
-        return sheet_names
+        return sheetTitle, sheet_names
 
     except Exception as e:
         log(f"An error occurred: {e}")
-        return "Permission Denied"
+        return "Viewing: ❌, Writing: ❌","Permission Denied"
 
 
 
@@ -363,7 +373,8 @@ def main ():
 
     # if sheet_data is not None:
     #     log(sheet_data)
-    validateURL(myURL)
+    result = validateURL(myURL)
+    
 
 
 
@@ -372,32 +383,3 @@ if __name__ == '__main__':
 
 
 
-"""
-def download_column(sheet_name, column_name):
-    # Your Google Sheets API credentials JSON file path
-    credentials_file = 'path/to/your/credentials.json'
-
-    # Scope for accessing Google Sheets
-    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-
-    # Authenticate with Google Sheets API
-    creds = ServiceAccountCredentials.from_json_keyfile_name(credentials_file, scope)
-    client = gspread.authorize(creds)
-
-    # Open the specified Google Sheet
-    sheet = client.open(sheet_name)
-
-    # Select the first worksheet (index 0) or specify a specific worksheet by title.
-    worksheet = sheet.get_worksheet(0)
-
-    # Get the values from the specified column
-    column = worksheet.col_values(ord(column_name.upper()) - 64)  # Converts column letter to number (A=1, B=2, ..., Z=26)
-
-    return column
-
-# Replace 'Your_Sheet_Name' with the name of your Google Sheet and 'A' with the column letter you want to download.
-column_data = download_column('Your_Sheet_Name', 'A')
-print(column_data)
-
-
-"""

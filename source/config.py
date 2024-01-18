@@ -11,7 +11,7 @@ def log(s, *args):
 
 ALFRED_PREFS = os.getenv('alfred_preferences')
 ALFRED_WORKFLOW_DIR = f'{ALFRED_PREFS}/workflows'
-
+KEYFILE = os.path.expanduser(os.getenv('KEYFILE', ''))
 
 
 

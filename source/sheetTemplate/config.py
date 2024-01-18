@@ -22,6 +22,7 @@ HEADER_ROW = int(os.path.expanduser(os.getenv('HEADER_ROW', ''))) - 1
 
 TITLE_COLUMN = int(os.path.expanduser(os.getenv('TITLE_COLUMN', '')))-1
 SUBTITLE_COLUMN = int(os.path.expanduser(os.getenv('SUBTITLE_COLUMN', '')))-1
+APPEND_COLUMN = int(os.path.expanduser(os.getenv('APPEND_COLUMN', '')))-1
 
 ARG_COLUMN_V = os.path.expanduser(os.getenv('ARG_COLUMN', ''))
 if ARG_COLUMN_V:
