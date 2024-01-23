@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>giovanni-sheets</string>
+	<string>giovanni-gsheets</string>
 	<key>category</key>
 	<string>Productivity</string>
 	<key>connections</key>
@@ -47,11 +47,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>704FED2C-359D-4D38-9B41-A83FBA2E0A9A</key>
+		<key>8806EA40-F57A-46EC-991C-DC63CA7B0EF6</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>35E5B69C-081F-4B18-99BF-A34975F39873</string>
+				<string>659D9AAD-025B-494E-8D11-979DE23E77EE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -94,127 +94,9 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>alfred-sheets</string>
+	<string>gsheets</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>wwg</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>export PYTHONPATH="$PWD/lib"
-python3 gioGoogleAPI.py "2"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Sheet List</string>
-				<key>type</key>
-				<integer>11</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>0443C1B7-C877-403A-9909-D52A574ADF36</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>python3 cloneSheets.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>35E5B69C-081F-4B18-99BF-A34975F39873</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sheets:clone</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Clone Sheets</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>704FED2C-359D-4D38-9B41-A83FBA2E0A9A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -249,47 +131,6 @@ python3 gioGoogleAPI.py "2"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>myFile</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>53F39B0D-9C43-4E24-A373-E39CAA4845A7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>!!ww</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>alfred-sheets</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>31D75F56-959F-411F-BC8A-8E29FC3D1086</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -314,7 +155,7 @@ python3 gioGoogleAPI.py "2"</string>
 				<string>checking...</string>
 				<key>script</key>
 				<string>export PYTHONPATH="$PWD/lib"
-python3 gioGoogleAPI.py "$myFile"</string>
+python3 checkSheet.py "$myFile"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -338,17 +179,30 @@ python3 gioGoogleAPI.py "$myFile"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv
+
+set myWorkflow to system attribute "myBundleID"
+tell application id "com.runningwithcrayons.Alfred" to reveal workflow myWorkflow
+
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>FD0931C4-1DD8-434F-A70B-D332E6B48858</string>
+			<string>659D9AAD-025B-494E-8D11-979DE23E77EE</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -377,7 +231,7 @@ python3 gioGoogleAPI.py "$myFile"</string>
 				<string>⏳⏳⏳</string>
 				<key>script</key>
 				<string>export PYTHONPATH="$PWD/lib"
-python3 cloneSheets.py</string>
+python3 cloneSheet.py</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -398,73 +252,119 @@ python3 cloneSheets.py</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>FD0931C4-1DD8-434F-A70B-D332E6B48858</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>myFile</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>53F39B0D-9C43-4E24-A373-E39CAA4845A7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>{var:MainKeyword}</string>
+				<key>subtext</key>
+				<string>Press ↩️ to proceed</string>
+				<key>text</key>
+				<string>alfred-sheets</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>31D75F56-959F-411F-BC8A-8E29FC3D1086</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>0443C1B7-C877-403A-9909-D52A574ADF36</key>
-		<dict>
-			<key>xpos</key>
-			<real>585</real>
-			<key>ypos</key>
-			<real>110</real>
-		</dict>
 		<key>31D75F56-959F-411F-BC8A-8E29FC3D1086</key>
 		<dict>
 			<key>xpos</key>
-			<real>295</real>
+			<real>95</real>
 			<key>ypos</key>
-			<real>695</real>
-		</dict>
-		<key>35E5B69C-081F-4B18-99BF-A34975F39873</key>
-		<dict>
-			<key>xpos</key>
-			<real>600</real>
-			<key>ypos</key>
-			<real>320</real>
+			<real>140</real>
 		</dict>
 		<key>53F39B0D-9C43-4E24-A373-E39CAA4845A7</key>
 		<dict>
 			<key>xpos</key>
-			<real>805</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>90</real>
 		</dict>
 		<key>6286DB17-C84B-4F43-8290-B1C0F928C7AB</key>
 		<dict>
 			<key>xpos</key>
-			<real>280</real>
+			<real>95</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>15</real>
 		</dict>
-		<key>704FED2C-359D-4D38-9B41-A83FBA2E0A9A</key>
+		<key>659D9AAD-025B-494E-8D11-979DE23E77EE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>Open Workflow config</string>
 			<key>xpos</key>
-			<real>160</real>
+			<real>1230</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>60</real>
 		</dict>
 		<key>8806EA40-F57A-46EC-991C-DC63CA7B0EF6</key>
 		<dict>
 			<key>xpos</key>
-			<real>1125</real>
+			<real>945</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>60</real>
 		</dict>
 		<key>E44AD3EB-3F0D-41A4-B8FC-2B692625CE3F</key>
 		<dict>
 			<key>xpos</key>
-			<real>875</real>
+			<real>705</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>60</real>
 		</dict>
 		<key>FD0931C4-1DD8-434F-A70B-D332E6B48858</key>
 		<dict>
 			<key>xpos</key>
-			<real>625</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>60</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -489,6 +389,27 @@ python3 cloneSheets.py</string>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>KEYFILE</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>gshe</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Main Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>MainKeyword</string>
 		</dict>
 	</array>
 	<key>version</key>

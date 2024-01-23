@@ -31,6 +31,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4C91F60C-7C32-4E50-BAA9-93C6687FB6F1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FB5C9206-8F35-49CF-A63E-A2DD833C72BD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8AF507E8-A199-4C20-94E1-C88C059F2D12</key>
 		<array>
 			<dict>
@@ -56,11 +69,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A643F3EB-7F68-4AE5-B8A8-DFF4D6BD9585</key>
+		<key>E43256F1-8519-491C-B9C8-32173EEF23CD</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E43256F1-8519-491C-B9C8-32173EEF23CD</string>
+				<string>4C91F60C-7C32-4E50-BAA9-93C6687FB6F1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -77,7 +90,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>alfred-sheets - template</string>
+	<string>gsheets - template</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -205,29 +218,32 @@ python3 browseSheet.py "2"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>{var:MAIN_KEYWORD}::append</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>append value to xxx column</string>
-				<key>withspace</key>
+				<key>concurrently</key>
 				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PYTHONPATH="$PWD/lib"
+python3 appendValue.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A643F3EB-7F68-4AE5-B8A8-DFF4D6BD9585</string>
+			<string>4C91F60C-7C32-4E50-BAA9-93C6687FB6F1</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -235,9 +251,11 @@ python3 browseSheet.py "2"</string>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:MAIN_KEYWORD}::append</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -249,9 +267,27 @@ python3 browseSheet.py "2"</string>
 				<key>runningsubtext</key>
 				<string>wait wait wait</string>
 				<key>script</key>
-				<string>export PYTHONPATH="$PWD/lib"
-python3 appendValue.py
-</string>
+				<string>#!/bin/zsh
+
+myText=$1
+myTextLength=${#myText}
+
+
+
+cat &lt;&lt; EOB
+{"items": [
+
+	{
+		"title": "length: $myTextLength",
+		"subtitle": "$1",
+		"arg": "$1"
+		}
+	
+
+	
+
+]}
+EOB</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -263,7 +299,7 @@ python3 appendValue.py
 				<key>type</key>
 				<integer>11</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -271,6 +307,27 @@ python3 appendValue.py
 			<string>E43256F1-8519-491C-B9C8-32173EEF23CD</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>FB5C9206-8F35-49CF-A63E-A2DD833C72BD</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -280,23 +337,23 @@ python3 appendValue.py
 		<key>0443C1B7-C877-403A-9909-D52A574ADF36</key>
 		<dict>
 			<key>xpos</key>
-			<real>155</real>
+			<real>100</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>85</real>
+		</dict>
+		<key>4C91F60C-7C32-4E50-BAA9-93C6687FB6F1</key>
+		<dict>
+			<key>xpos</key>
+			<real>910</real>
+			<key>ypos</key>
+			<real>585</real>
 		</dict>
 		<key>8AF507E8-A199-4C20-94E1-C88C059F2D12</key>
 		<dict>
 			<key>xpos</key>
-			<real>425</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>160</real>
-		</dict>
-		<key>A643F3EB-7F68-4AE5-B8A8-DFF4D6BD9585</key>
-		<dict>
-			<key>xpos</key>
-			<real>145</real>
-			<key>ypos</key>
-			<real>580</real>
+			<real>105</real>
 		</dict>
 		<key>D972334E-D38E-4740-A254-C30B2D2AEE5E</key>
 		<dict>
@@ -315,9 +372,16 @@ python3 appendValue.py
 		<key>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</key>
 		<dict>
 			<key>xpos</key>
-			<real>620</real>
+			<real>630</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>80</real>
+		</dict>
+		<key>FB5C9206-8F35-49CF-A63E-A2DD833C72BD</key>
+		<dict>
+			<key>xpos</key>
+			<real>1125</real>
+			<key>ypos</key>
+			<real>595</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

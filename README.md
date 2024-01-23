@@ -4,6 +4,17 @@
 Inspired by `I-sheet-you-not`, this Workflow provides the means to create new Workflows to access individual Google Sheets.
 
 
+
+## Usage
+1. Open a Google Sheet in your browser. 
+2. Launch `alfred-sheets` via keyword (default: `gshe`) or hotkey
+3. `alfred-sheets` will check the frontmost page with one of three outcomes:
+	1. The website is not a Google Sheet ▶️ check URL
+	2. The website is a Google Sheet but you don't have the right permissions ▶️ review the `Setting up` section
+	3. The website is a Google Sheet and you have at least viewing privileges ▶️ go to step 4
+4. `alfred-sheets` will list the individual worksheets. Select one to generate an `alfred-sheets` Workflow instance to browse that Sheet. 
+5. Once a new Workflow is created, its `Workflow Configuration` is shown. 
+
 ## Setting up ⚙️
 Note: this is more complex than the average workflow. I tried to document all the steps below, feel free to point to unclear steps or instructions. 
 Steps 1-x are needed to access public Google Sheets. Additional steps x-y are needed to access private Google Sheets. 

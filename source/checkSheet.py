@@ -52,7 +52,7 @@ def validateURL (myurl):
     
     else:
         sheetTitle, allSheets = get_sheet_list (myurl)
-        writePermissions = checkPermissions (myURL)
+        writePermissions = checkPermissions (myurl)
         if writePermissions:
             writeP = "✅"
             writeS = ' and edit'
@@ -61,7 +61,7 @@ def validateURL (myurl):
             writeS = ''
         result["items"].append({
         "title": "👍 This is a Google Sheet!",
-        "subtitle": f"{sheetTitle} – Reading: ✅, Writing = {writeP}",
+        "subtitle": f"{sheetTitle} – Read ✅, Write {writeP}",
         "arg": "",
         "icon": {
             "path": ""
@@ -84,6 +84,10 @@ def validateURL (myurl):
                 "title": f"Clone alfred-sheets to browse{writeS}: {currSheet}",
             "subtitle": f"{sheetTitle} ▶️ {currSheet}",
             "arg": "",
+            "variables": {
+                    "NEW_URL": myurl
+                        },
+                
             "icon": {
                 "path": "icons/cloneIcon.png"
                 }

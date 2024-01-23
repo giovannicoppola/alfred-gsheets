@@ -3,9 +3,13 @@ from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 import re
 import json
+import gspread
+import sys
+from gspread.exceptions import APIError
 
 from config import log, MY_SHEET,MY_URL, KEYFILE, APPEND_COLUMN
 
+myString = sys.argv[1]
 
 def checkPermissions (myURL):
     result = {"items": []}
@@ -53,36 +57,40 @@ def checkPermissions (myURL):
 
 
 
-def addValue (myValue,mySource):
+def appendValue (myValue,myColumn):
     scopes = [
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive'
     ]
     credentials = ServiceAccountCredentials.from_json_keyfile_name(KEYFILE, scopes) 
-    #access the json key you downloaded earlier 
-
     file = gspread.authorize(credentials) # authenticate the JSON key with gspread
-    sheet = file.open("Chiatto")  #open sheet
-    worksheet = sheet.worksheet("weight")  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+    
+    sheet = file.open_by_url(MY_URL)
+    worksheet = sheet.worksheet(MY_SHEET)  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
     #firstRow = len(worksheet.col_values(0))
-    lastrow = len(worksheet.col_values(mySource))
+    lastrow = len(worksheet.col_values(myColumn))
     lastrow = lastrow+1
-    worksheet.update_cell(lastrow, mySource, myValue)
+    try:
+        # Attempt to update the cell
+        worksheet.update_cell(lastrow, myColumn, myValue)
+        print("Cell updated successfully!")
+
+    except APIError as e:
+        # Handle API errors
+        print(f"APIError: {e}")
+        
+    except Exception as e:
+        # Handle other exceptions
+        print(f"An unexpected error occurred: {e}")
 
 
-    #worksheet.update(['Test1'], range='B2:L6')
-
-    #all_cells = sheet.range('A1:C6')
-    #print(all_cells)
-
-    #A1 = worksheet.acell('B2').value
-    #print(A1)
 
 
 def main ():
-    checkPermissions(MY_URL)
-
+    #checkPermissions(MY_URL)
+    
+    appendValue (myString, APPEND_COLUMN)
 
 
 if __name__ == '__main__':

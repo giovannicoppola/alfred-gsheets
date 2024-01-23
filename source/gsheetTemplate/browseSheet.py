@@ -31,9 +31,12 @@ from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, A
 mySource = [1,2,3,4]
 #myURL = sys.argv[1]
 
+MYINPUT = sys.argv[1].casefold()
 
-
-
+# toShow = [item for item in toShow if (
+    
+#     all(substring.casefold() in item['content'].casefold() for substring in mySearchStrings)
+#     )]
 
 
 def get_sheet_list(spreadsheet_url, creds_path=KEYFILE):
