@@ -1,6 +1,7 @@
 {
-    "ARG_COLUMN": "2",
-    "MY_LAYOUT": "testcaz [10]",
-    "MY_URL": "https://docs.google.com/spreadsheets/d/1JUUkxXz6MJ56CcIkeqhv8C9q39sg3sSvGIwRsTk6kkM/edit#gid=0",
-    "SUBTITLE_COLUMN": "3"
+    "KEYFILE": "~/gDrive/GitHub repos/alfred-gsheets/source/burattinaio-105c8840e188.json",
+    "MAIN_KEYWORD": "caz",
+    "MY_LAYOUT": "Title: \"caz [1] \"and caz\" [2] \u2705 maybe [3]\"\nSubtitle: \"fdsf [3]\"\nArg: \"[1]\"",
+    "MY_SHEET": "TV watch list",
+    "MY_URL": "https://docs.google.com/spreadsheets/d/1rflTHJeEHe82gWdROXYnpLa_9DvDNTjY3JWIIpQM9Hk/edit#gid=853558948"
 }

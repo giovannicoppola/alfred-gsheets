@@ -15,52 +15,110 @@ import plistlib
 import json
 
 MyNewURL = os.getenv('NEW_URL')
-    
+MyNewSheet = os.getenv('NEW_SHEET')
+MyEstimatedColumns = os.getenv('EST_COLS')
+NewWorksheetName = os.getenv('NEW_WORKSHEET_NAME')
+# Generate a random UUID string
+random_string = str(uuid.uuid4())
+random_string = "testingtesting"
+
+newBundleID = f"giovanni-gsheets_{random_string}"
 
 
-def plist2JSON (myPlistFile,myJSONFile):
-    with open(myPlistFile, 'rb') as plist_file:
+
+def plist2JSON ():
+    """
+    worker function to export plist files to JSON for troubleshooting
+    TO BE DELETED or commented out
+    """
+    with open('gsheetTemplate/info.plist', 'rb') as plist_file:
         plist_data = plistlib.load(plist_file)
     
     json_data = json.dumps(plist_data, indent = 4)
 
-    with open(myJSONFile, 'w') as json_file:
+    with open('gsheetTemplate/infoplist.json', 'w') as json_file:
         json_file.write(json_data)
     
-    return plist_data
+    with open('gsheetTemplate/prefs.plist', 'rb') as plist_file:
+        plist_data = plistlib.load(plist_file)
+    
+    json_data = json.dumps(plist_data, indent = 4)
 
+    with open('gsheetTemplate/prefsplist.json', 'w') as json_file:
+        json_file.write(json_data)
+    
 
-
-def editPlist (myPlistFile, newPlist):
-    with open(myPlistFile, 'rb') as plist_file:
+def editPrefs (myPrefFile, newPref):
+    with open(myPrefFile, 'rb') as plist_file:
         plist_json = plistlib.load(plist_file)
     try:
         
-        #myData = plist2JSON ("gsheetTemplate/info.plist","gsheetTemplate/infoplist.json")
-        #myData = plist2JSON ("gsheetTemplate/info.plist")
-        plist_json ['bundleid'] = 'cazzonecacatone'
-        log (f"UUUUUUUUURL: {MyNewURL}")
-        #json2plist (myData,"gsheetTemplate/info.plist")
+        #plist_json ['MY_LAYOUT'] = "cazzone"
+        #plist_json ['MY_URL'] = MyNewURL
+        plist_json ['MY_SHEET'] = MyNewSheet
+        # Open the .plist file in binary mode and write the data
+        with open(newPref, 'wb') as plist_file:
+            plistlib.dump(plist_json, plist_file, fmt=plistlib.FMT_XML)  # FMT_XML for XML format
+        
+        
+        log(f"Changes written to '{newPref}' successfully.")
+    except Exception as e:
+        log(f"Error: Unable to write to '{newPref}'. {e}")
+    
+
+def editInfo (myInfoFile, newInfo,newBundleID):
+    ## choosing a worksheet name and keyword
+    words = NewWorksheetName.split()
+
+    if len(words) > 0:
+        # If there is a space, return the first word
+        myfirstWord = words[0]
+    else:
+        # If no space, return the first three letters
+        myfirstWord = NewWorksheetName[:3]
+    myWorkflowName = f'gsheets-{myfirstWord}'
+    
+    with open(myInfoFile, 'rb') as plist_file:
+        plist_json = plistlib.load(plist_file)
+    try:
+        
+        plist_json ['bundleid'] = newBundleID
+        plist_json ['name'] = myWorkflowName
+        
+        # Setting MY_URL
+        plist_json['userconfigurationconfig'] = [
+            {**item, "config": {**item["config"], "default": MyNewURL}} if item["variable"] == "MY_URL" else item
+            for item in plist_json["userconfigurationconfig"]
+        ]
+
+        # Setting MY_SHEET
+        plist_json['userconfigurationconfig'] = [
+            {**item, "config": {**item["config"], "default": MyNewSheet}} if item["variable"] == "MY_SHEET" else item
+            for item in plist_json["userconfigurationconfig"]
+        ]
+
+        # Setting MAIN_KEYWORD (default: first 3 letters of Worksheet name)
+        plist_json['userconfigurationconfig'] = [
+            {**item, "config": {**item["config"], "default": NewWorksheetName[:3]}} if item["variable"] == "MAIN_KEYWORD" else item
+            for item in plist_json["userconfigurationconfig"]
+        ]
+
+       
         
         # Open the .plist file in binary mode and write the data
-        with open(newPlist, 'wb') as plist_file:
+        with open(newInfo, 'wb') as plist_file:
             plistlib.dump(plist_json, plist_file, fmt=plistlib.FMT_XML)  # FMT_XML for XML format
-            #plist_json.dump(myData, plist_file)
+            
 
-        #myPrefs = plist2JSON ("gsheetTemplate/prefs.plist","gsheetTemplate/prefsplist.json")
-        log(f"Changes written to '{newPlist}' successfully.")
+        
+        log(f"Changes written to '{newInfo}' successfully.")
     except Exception as e:
-        log(f"Error: Unable to write to '{newPlist}'. {e}")
+        log(f"Error: Unable to write to '{newInfo}'. {e}")
     
 
 
 
 def cloneWorkflow():
-    # Generate a random UUID string
-    random_string = str(uuid.uuid4())
-    random_string = "testingtesting"
-    
-    newBundleID = f"giovanni-gsheets_{random_string}"
     new_folder_name = f"{ALFRED_WORKFLOW_DIR}/{newBundleID}"
     
     # Remove the folder already exists
@@ -85,12 +143,13 @@ def cloneWorkflow():
         if os.path.isfile(item_path):
             if item == 'info.plist':
             # insert the plist editing here
-                editPlist (item_path,new_item_path)
+                editInfo (item_path,new_item_path, newBundleID)
                 log ("found info.plist")
                 continue
 
             elif item == 'prefs.plist':
                 # insert the prefs editing here
+                editPrefs (item_path,new_item_path)
                 log ("found prefs.plist")
                 continue
                 
@@ -112,11 +171,11 @@ def printDone ():
     result = {"items": []}
             
     result["items"].append({
-            "title": "✅ Done!",
+            "title": f"✅ Done! Use '{NewWorksheetName[:3].casefold()}' to launch",
             'subtitle': "press ↩️ to open the new workflow configuration, or Esc to exit" ,
             'valid': True,
             "variables": {
-                "myBundleID": "cazacazacaza"
+                "myBundleID": newBundleID
                     },
             
             "icon": {
@@ -131,6 +190,6 @@ def printDone ():
 
 if __name__ == "__main__":
     cloneWorkflow()
-    
+    #plist2JSON ()
     printDone()
 

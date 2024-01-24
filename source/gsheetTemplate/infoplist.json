@@ -16,6 +16,14 @@
                 "vitoclose": false
             }
         ],
+        "4C91F60C-7C32-4E50-BAA9-93C6687FB6F1": [
+            {
+                "destinationuid": "FB5C9206-8F35-49CF-A63E-A2DD833C72BD",
+                "modifiers": 0,
+                "modifiersubtext": "",
+                "vitoclose": false
+            }
+        ],
         "8AF507E8-A199-4C20-94E1-C88C059F2D12": [
             {
                 "destinationuid": "EA194C6E-1CB2-4841-992D-DE140BDBC9F6",
@@ -30,12 +38,20 @@
                 "modifiersubtext": "",
                 "vitoclose": false
             }
+        ],
+        "E43256F1-8519-491C-B9C8-32173EEF23CD": [
+            {
+                "destinationuid": "4C91F60C-7C32-4E50-BAA9-93C6687FB6F1",
+                "modifiers": 0,
+                "modifiersubtext": "",
+                "vitoclose": false
+            }
         ]
     },
     "createdby": "giovanni",
     "description": "",
     "disabled": false,
-    "name": "alfred-sheets - template",
+    "name": "gsheets - template",
     "objects": [
         {
             "config": {
@@ -104,25 +120,88 @@
             "type": "alfred.workflow.output.clipboard",
             "uid": "D972334E-D38E-4740-A254-C30B2D2AEE5E",
             "version": 3
+        },
+        {
+            "config": {
+                "lastpathcomponent": false,
+                "onlyshowifquerypopulated": false,
+                "removeextension": false,
+                "text": "",
+                "title": ""
+            },
+            "type": "alfred.workflow.output.notification",
+            "uid": "FB5C9206-8F35-49CF-A63E-A2DD833C72BD",
+            "version": 1
+        },
+        {
+            "config": {
+                "concurrently": false,
+                "escaping": 102,
+                "script": "export PYTHONPATH=\"$PWD/lib\"\npython3 appendValue.py \"$1\"",
+                "scriptargtype": 1,
+                "scriptfile": "",
+                "type": 11
+            },
+            "type": "alfred.workflow.action.script",
+            "uid": "4C91F60C-7C32-4E50-BAA9-93C6687FB6F1",
+            "version": 2
+        },
+        {
+            "config": {
+                "alfredfiltersresults": false,
+                "alfredfiltersresultsmatchmode": 0,
+                "argumenttreatemptyqueryasnil": true,
+                "argumenttrimmode": 0,
+                "argumenttype": 0,
+                "escaping": 102,
+                "keyword": "{var:MAIN_KEYWORD}::append",
+                "queuedelaycustom": 3,
+                "queuedelayimmediatelyinitially": true,
+                "queuedelaymode": 0,
+                "queuemode": 1,
+                "runningsubtext": "wait wait wait",
+                "script": "#!/bin/zsh\n\nmyText=$1\nmyTextLength=${#myText}\n\n\n\ncat << EOB\n{\"items\": [\n\n\t{\n\t\t\"title\": \"length: $myTextLength\",\n\t\t\"subtitle\": \"$1\",\n\t\t\"arg\": \"$1\"\n\t\t}\n\t\n\n\t\n\n]}\nEOB",
+                "scriptargtype": 1,
+                "scriptfile": "",
+                "subtext": "",
+                "title": "Append value to xxx column",
+                "type": 11,
+                "withspace": true
+            },
+            "type": "alfred.workflow.input.scriptfilter",
+            "uid": "E43256F1-8519-491C-B9C8-32173EEF23CD",
+            "version": 3
         }
     ],
     "readme": "",
     "uidata": {
         "0443C1B7-C877-403A-9909-D52A574ADF36": {
-            "xpos": 155.0,
-            "ypos": 130.0
+            "xpos": 100.0,
+            "ypos": 85.0
+        },
+        "4C91F60C-7C32-4E50-BAA9-93C6687FB6F1": {
+            "xpos": 910.0,
+            "ypos": 585.0
         },
         "8AF507E8-A199-4C20-94E1-C88C059F2D12": {
-            "xpos": 425.0,
-            "ypos": 160.0
+            "xpos": 430.0,
+            "ypos": 105.0
         },
         "D972334E-D38E-4740-A254-C30B2D2AEE5E": {
             "xpos": 620.0,
             "ypos": 305.0
         },
-        "EA194C6E-1CB2-4841-992D-DE140BDBC9F6": {
+        "E43256F1-8519-491C-B9C8-32173EEF23CD": {
             "xpos": 620.0,
-            "ypos": 125.0
+            "ypos": 585.0
+        },
+        "EA194C6E-1CB2-4841-992D-DE140BDBC9F6": {
+            "xpos": 630.0,
+            "ypos": 80.0
+        },
+        "FB5C9206-8F35-49CF-A63E-A2DD833C72BD": {
+            "xpos": 1125.0,
+            "ypos": 585.0
         }
     },
     "userconfigurationconfig": [
@@ -221,6 +300,30 @@
             "label": "Advanced: Custom Layout",
             "type": "textarea",
             "variable": "MY_LAYOUT"
+        },
+        {
+            "config": {
+                "default": "",
+                "filtermode": 2,
+                "placeholder": "",
+                "required": true
+            },
+            "description": "",
+            "label": "Key File",
+            "type": "filepicker",
+            "variable": "KEYFILE"
+        },
+        {
+            "config": {
+                "default": "1",
+                "placeholder": "",
+                "required": false,
+                "trim": true
+            },
+            "description": "Column to which append new values. Will only work if the sheet has writing permissions",
+            "label": "Append column",
+            "type": "textfield",
+            "variable": "APPEND_COLUMN"
         }
     ],
     "version": "",

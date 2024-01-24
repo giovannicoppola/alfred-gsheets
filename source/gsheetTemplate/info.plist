@@ -218,6 +218,27 @@ python3 browseSheet.py "2"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>FB5C9206-8F35-49CF-A63E-A2DD833C72BD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -308,27 +329,6 @@ EOB</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>FB5C9206-8F35-49CF-A63E-A2DD833C72BD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -381,7 +381,7 @@ EOB</string>
 			<key>xpos</key>
 			<real>1125</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>585</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -411,7 +411,7 @@ EOB</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string></string>
+				<string>https://docs.google.com/spreadsheets/d/1rflTHJeEHe82gWdROXYnpLa_9DvDNTjY3JWIIpQM9Hk/edit#gid=853558948</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>

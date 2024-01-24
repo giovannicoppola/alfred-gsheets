@@ -51,7 +51,7 @@ def validateURL (myurl):
         print (json.dumps(result))
     
     else:
-        sheetTitle, allSheets = get_sheet_list (myurl)
+        sheetTitle, allSheets, lenHeads = get_sheet_list (myurl)
         writePermissions = checkPermissions (myurl)
         if writePermissions:
             writeP = "✅"
@@ -79,13 +79,16 @@ def validateURL (myurl):
             })
 
         else:
-            for currSheet in allSheets: 
+            for currSheet, currCol in zip (allSheets,lenHeads): 
                 result["items"].append({
                 "title": f"Clone alfred-sheets to browse{writeS}: {currSheet}",
-            "subtitle": f"{sheetTitle} ▶️ {currSheet}",
+            "subtitle": f"{sheetTitle} ▶️ {currSheet} estimated columns: {currCol}",
             "arg": "",
             "variables": {
-                    "NEW_URL": myurl
+                    "NEW_WORKSHEET_NAME": sheetTitle,
+                    "NEW_URL": myurl,
+                    "NEW_SHEET": currSheet,
+                    "EST_COLS": currCol
                         },
                 
             "icon": {
@@ -98,6 +101,25 @@ def validateURL (myurl):
         
     
     return None
+
+
+def countColumns (myurl):
+
+    # Authenticate and open the Google Sheet
+    gc = gspread.service_account()
+    spreadsheet = gc.open('Your Spreadsheet Name')  # Replace with your actual spreadsheet name
+
+    # Select a specific worksheet
+    worksheet = spreadsheet.get_worksheet(0)  # Replace with the index or title of your worksheet
+
+    # Get all non-empty cells in the worksheet
+    all_cells = worksheet.get_all_values()
+
+    # Calculate the maximum number of columns with data
+    max_columns = max(len(row) for row in all_cells)
+
+    print("Number of columns with data:", max_columns)
+
 
 
 
@@ -147,15 +169,25 @@ def get_sheet_list(spreadsheet_url, creds_path='burattinaio-105c8840e188.json'):
         sheetTitle = spreadsheet.title
         # Print the names of each worksheet
         sheet_names = [worksheet.title for worksheet in all_sheets]
+        
         log(f"Sheet names:{sheet_names}")
         log (f"sheet title: {sheetTitle}")
+        # Get all non-empty cells in the worksheet
+        all_cells = all_sheets[0].get_all_values()
+         # Extract column headers (assuming the first row contains column headers)
+        len_head = [len(sheet.row_values(1)) for sheet in all_sheets]
 
-        
-        return sheetTitle, sheet_names
+        # Calculate the maximum number of columns with data
+        #max_columns = max(len(row) for row in all_cells)
+        #log (f"max columns in first sheet: {max_columns} or {len_head}")
+            
+        return sheetTitle, sheet_names, len_head
 
     except Exception as e:
         log(f"An error occurred: {e}")
         return "Viewing: ❌, Writing: ❌","Permission Denied"
+
+
 
 
 
