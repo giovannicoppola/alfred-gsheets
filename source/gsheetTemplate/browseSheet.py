@@ -28,7 +28,7 @@ from urllib.parse import urlparse
 from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, LAYOUT_LIST,KEYFILE, log
 
 #myValue = sys.argv[2]
-mySource = [1,2,3,4]
+mySource = list(range(1, 12))
 #myURL = sys.argv[1]
 
 MYINPUT = sys.argv[1].casefold()
@@ -100,7 +100,7 @@ def fetchValues (spreadsheet_url):
     'https://www.googleapis.com/auth/drive'
     ]
     credentials = ServiceAccountCredentials.from_json_keyfile_name(KEYFILE, scopes) 
-    #access the json key you downloaded earlier 
+    
 
     file = gspread.authorize(credentials) # authenticate the JSON key with gspread
     try:
@@ -125,10 +125,22 @@ def fetchValues (spreadsheet_url):
     # Get all values from the worksheet
     all_values = worksheet.get_all_values()
     #all_values = all_values[1:]
+
+    #### TO REVIEW
+
+    # # Define the list of column indices to retrieve
+    # column_indices = [3, 14, 15]
+
     
+    # # Extract the desired columns
+    # selected_columns = [[row[i] for i in column_indices] for row in all_values]
+
+
+
     # Extract column headers (assuming the first row contains column headers)
     column_headers = all_values[HEADER_ROW]
     #log (column_headers)
+
 
     # Create a list to store dictionaries representing each row
     rows_as_list_of_dictionaries = []
@@ -179,18 +191,7 @@ def fetchValues (spreadsheet_url):
 
 
 def main ():
-    #addValue (myValue,mySource)
-    #fetchValues ([1,2,3,4])
-    #fetchValuesPublic ([1,2,3])
-    
-    # # The URL of the public Google Sheet
-    # spreadsheet_url = "https://docs.google.com/spreadsheets/d/1mnPLSFNf_t9-C4DOYxnVXIDU_G0hXDRf8kP2wLlkB8I/edit?pli=1#gid=0"
-
-    # # Access the public Google Sheet and print the data
-    # sheet_data = access_public_google_sheet(spreadsheet_url)
-
-    # if sheet_data is not None:
-    #     log(sheet_data)
+        
     fetchValues(MY_URL)
 
 

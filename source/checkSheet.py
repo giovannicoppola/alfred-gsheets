@@ -85,6 +85,7 @@ def validateURL (myurl):
             "subtitle": f"{sheetTitle} ▶️ {currSheet} estimated columns: {currCol}",
             "arg": "",
             "variables": {
+                    "N_COLS": currCol,
                     "NEW_WORKSHEET_NAME": sheetTitle,
                     "NEW_URL": myurl,
                     "NEW_SHEET": currSheet,

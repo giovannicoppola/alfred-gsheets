@@ -344,9 +344,9 @@ EOB</string>
 		<key>4C91F60C-7C32-4E50-BAA9-93C6687FB6F1</key>
 		<dict>
 			<key>xpos</key>
-			<real>910</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>515</real>
 		</dict>
 		<key>8AF507E8-A199-4C20-94E1-C88C059F2D12</key>
 		<dict>
@@ -365,9 +365,9 @@ EOB</string>
 		<key>E43256F1-8519-491C-B9C8-32173EEF23CD</key>
 		<dict>
 			<key>xpos</key>
-			<real>620</real>
+			<real>120</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>515</real>
 		</dict>
 		<key>EA194C6E-1CB2-4841-992D-DE140BDBC9F6</key>
 		<dict>
@@ -379,9 +379,9 @@ EOB</string>
 		<key>FB5C9206-8F35-49CF-A63E-A2DD833C72BD</key>
 		<dict>
 			<key>xpos</key>
-			<real>1125</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>515</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -495,11 +495,11 @@ EOB</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>2</string>
+				<string>1</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
-				<true/>
+				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
@@ -516,7 +516,7 @@ EOB</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string></string>
+				<string>1</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>

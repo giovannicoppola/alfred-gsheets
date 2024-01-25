@@ -10,7 +10,7 @@ W29Q3 – 203 ➡️ 161 – 72 ❇️ 293
 import os
 import shutil
 import uuid
-from config import log, ALFRED_WORKFLOW_DIR
+from config import log, ALFRED_WORKFLOW_DIR, KEYFILE
 import plistlib
 import json
 
@@ -18,6 +18,8 @@ MyNewURL = os.getenv('NEW_URL')
 MyNewSheet = os.getenv('NEW_SHEET')
 MyEstimatedColumns = os.getenv('EST_COLS')
 NewWorksheetName = os.getenv('NEW_WORKSHEET_NAME')
+NumberColumns = int(os.getenv('N_COLS'))
+
 # Generate a random UUID string
 random_string = str(uuid.uuid4())
 random_string = "testingtesting"
@@ -78,6 +80,15 @@ def editInfo (myInfoFile, newInfo,newBundleID):
         myfirstWord = NewWorksheetName[:3]
     myWorkflowName = f'gsheets-{myfirstWord}'
     
+    
+
+    if NumberColumns > 2:
+        SubtitleCol = 2    
+        ArgCol = 3
+    elif NumberColumns > 1:
+        SubtitleCol = ArgCol = 2    
+        
+
     with open(myInfoFile, 'rb') as plist_file:
         plist_json = plistlib.load(plist_file)
     try:
@@ -103,7 +114,24 @@ def editInfo (myInfoFile, newInfo,newBundleID):
             for item in plist_json["userconfigurationconfig"]
         ]
 
-       
+       # Setting default columns if ncol >1 (all are 1 by default)
+        if NumberColumns > 1:
+            plist_json['userconfigurationconfig'] = [
+                {**item, "config": {**item["config"], "default": SubtitleCol}} if item["variable"] == "SUBTITLE_COLUMN" else item
+                for item in plist_json["userconfigurationconfig"]
+            ]
+
+            plist_json['userconfigurationconfig'] = [
+            {**item, "config": {**item["config"], "default": ArgCol}} if item["variable"] == "ARG_COLUMN" else item
+            for item in plist_json["userconfigurationconfig"]
+            ]
+        
+
+         # Setting key file
+        plist_json['userconfigurationconfig'] = [
+            {**item, "config": {**item["config"], "default": KEYFILE}} if item["variable"] == "KEYFILE" else item
+            for item in plist_json["userconfigurationconfig"]
+        ]
         
         # Open the .plist file in binary mode and write the data
         with open(newInfo, 'wb') as plist_file:
