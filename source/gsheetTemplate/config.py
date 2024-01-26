@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import os
 import sys
 import re
@@ -9,6 +7,51 @@ def log(s, *args):
         s = s % args
     print(s, file=sys.stderr)
 
+def extract_quoted_strings(string):
+    """
+    A function to process the custom layout and check that all the needed fields are included
+    """
+    # Split the input string into rows (assuming rows are separated by newline character '\n')
+    rows = string.split('\n')
+    
+    # Apply the regex pattern to each row and extend the result list
+    pattern = r'"((?:[^"]|"[^"]*")*)"'
+    extracted_strings = []
+    for row in rows:
+        extracted_strings.extend(re.findall(pattern, row))
+    
+    return extracted_strings
+
+
+"""
+TO REVIEW
+import re
+
+def extract_integer_in_square_brackets(input_string):
+    # Define the regular expression pattern
+    pattern = r'\[(\d+)\]'
+
+    # Use re.search to find the pattern in the input string
+    match = re.search(pattern, input_string)
+
+    if match:
+        # Extract the integer from the matched group
+        extracted_integer = int(match.group(1))
+        return extracted_integer
+    else:
+        # Return None if no match is found
+        return None
+
+# Example usage:
+input_string_1 = "This is a string with [123] inside."
+result_1 = extract_integer_in_square_brackets(input_string_1)
+print(result_1)  # Output: 123
+
+input_string_2 = "No integer in this string."
+result_2 = extract_integer_in_square_brackets(input_string_2)
+print(result_2)  # Output: None
+
+"""
 
 ALFRED_PREFS = os.getenv('alfred_preferences')
 ALFRED_WORKFLOW_DIR = f'{ALFRED_PREFS}/workflows'
@@ -33,38 +76,16 @@ else:
 
 MY_LAYOUT = os.path.expanduser(os.getenv('MY_LAYOUT', ''))
 
+if not MY_LAYOUT:
+    log ("layout empty")
+else:
+    log ("layout present")
 
-# def extract_quoted_strings(string):
-#     pattern = r'"((?:[^"]|"[^"]*")*)"'  # Matches text within double quotes
-#     extracted_strings = re.findall(pattern, string)
-#     return extracted_strings
 
-def extract_quoted_strings(string):
-    # Split the input string into rows (assuming rows are separated by newline character '\n')
-    rows = string.split('\n')
-    
-    # Apply the regex pattern to each row and extend the result list
-    pattern = r'"((?:[^"]|"[^"]*")*)"'
-    extracted_strings = []
-    for row in rows:
-        extracted_strings.extend(re.findall(pattern, row))
-    
-    return extracted_strings
     
 LAYOUT_LIST = extract_quoted_strings(MY_LAYOUT)
 
 log (LAYOUT_LIST)
-
-# if MY_LAYOUT:
-    
-#     MY_LAYOUT_S = re.sub(r'\[(\d+)\]', r'myRow[column_headers[{}]]', MY_LAYOUT)
-#     my_numbers = re.findall(r'\[(\d+)\]', MY_LAYOUT)
-#     my_numbers = [int(num) for num in my_numbers]  # Convert strings to integers
-    
-# else:
-#     MY_LAYOUT_S = '' 
-    
-
 
 
     

@@ -143,7 +143,7 @@
 				<string>wait wait wait</string>
 				<key>script</key>
 				<string>export PYTHONPATH="$PWD/lib"
-python3 browseSheet.py "2"</string>
+python3 browseSheet.py "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -546,8 +546,9 @@ EOB</string>
 				<integer>3</integer>
 			</dict>
 			<key>description</key>
-			<string>Title: [1]
-if set, will override the three fields above</string>
+			<string>Custom layout, will need to contain at least one row with at least one column number in square brackets.  Example: Title: "myTitle [1] 🌼"
+Subtitle: "note: [2]"
+Arg: "fdssf [3]"  If set, will override the three fields above</string>
 			<key>label</key>
 			<string>Advanced: Custom Layout</string>
 			<key>type</key>

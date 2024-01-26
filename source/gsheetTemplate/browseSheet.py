@@ -28,8 +28,8 @@ from urllib.parse import urlparse
 from config import HEADER_ROW, MY_SHEET,MY_URL, TITLE_COLUMN, SUBTITLE_COLUMN, ARG_COLUMN, LAYOUT_LIST,KEYFILE, log
 
 #myValue = sys.argv[2]
-mySource = list(range(1, 12))
-#myURL = sys.argv[1]
+#mySource = list(range(1, 12))
+mySource = [TITLE_COLUMN+1, SUBTITLE_COLUMN+1, ARG_COLUMN+1]
 
 MYINPUT = sys.argv[1].casefold()
 
@@ -65,6 +65,24 @@ def get_sheet_list(spreadsheet_url, creds_path=KEYFILE):
         log(f"An error occurred: {e}")
         return "Permission Denied"
 
+
+def printError ():
+    result = {"items": []}
+            
+    result["items"].append({
+            "title": f"ERROR🚨",
+            'subtitle': "DETAILS" ,
+            'valid': True,
+            "variables": {
+                
+                    },
+            
+            "icon": {
+                "path": 'icon.png'
+            },
+            'arg': "myArg" 
+                }) 
+    print (json.dumps(result))  
 
 
 
@@ -107,9 +125,9 @@ def fetchValues (spreadsheet_url):
         sheet = file.open_by_url(spreadsheet_url)
     
     except gspread.exceptions.SpreadsheetNotFound as e: 
-        log ("caz!! ========")
+        log ("======== Error ========")
         resultErr= {"items": [{
-        "title": "Error ",
+        "title": "⚠️ Error",
         "subtitle": "Press Enter to check the instructions",
         "arg": "",
         "icon": {
@@ -124,23 +142,16 @@ def fetchValues (spreadsheet_url):
     
     # Get all values from the worksheet
     all_values = worksheet.get_all_values()
-    #all_values = all_values[1:]
-
-    #### TO REVIEW
-
-    # # Define the list of column indices to retrieve
-    # column_indices = [3, 14, 15]
-
     
-    # # Extract the desired columns
-    # selected_columns = [[row[i] for i in column_indices] for row in all_values]
-
 
 
     # Extract column headers (assuming the first row contains column headers)
     column_headers = all_values[HEADER_ROW]
     #log (column_headers)
 
+    # # Extract the desired columns
+    #selected_columns = [[row[i] for i in mySource] for row in all_values]
+    #log (selected_columns)
 
     # Create a list to store dictionaries representing each row
     rows_as_list_of_dictionaries = []
@@ -155,9 +166,10 @@ def fetchValues (spreadsheet_url):
         rows_as_list_of_dictionaries.append(row_dict)
 
     #log (rows_as_list_of_dictionaries)
+    log (LAYOUT_LIST)
     
     for myRow in rows_as_list_of_dictionaries:
-        #log (myRow)
+        
         if LAYOUT_LIST:
             myTitle = replace_fields(LAYOUT_LIST[0],myRow,column_headers)
             mySubTitle = replace_fields(LAYOUT_LIST[1],myRow,column_headers)
