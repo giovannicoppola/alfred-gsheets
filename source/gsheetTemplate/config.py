@@ -17,39 +17,20 @@ def extract_quoted_strings(string):
     # Apply the regex pattern to each row and extend the result list
     pattern = r'"((?:[^"]|"[^"]*")*)"'
     extracted_strings = []
+    extracted_integers = []
+    pattern_col = r'\[(\d+)\]'
     for row in rows:
         extracted_strings.extend(re.findall(pattern, row))
-    
-    return extracted_strings
+        # Use re.search to find the pattern in the input string
+        matches = re.findall(pattern_col, row)
+        extracted_integers.extend ([int(match)-1 for match in matches])
+            
+    return extracted_strings, list(set(extracted_integers))
 
 
 """
-TO REVIEW
-import re
-
-def extract_integer_in_square_brackets(input_string):
-    # Define the regular expression pattern
-    pattern = r'\[(\d+)\]'
-
-    # Use re.search to find the pattern in the input string
-    match = re.search(pattern, input_string)
-
-    if match:
-        # Extract the integer from the matched group
         extracted_integer = int(match.group(1))
         return extracted_integer
-    else:
-        # Return None if no match is found
-        return None
-
-# Example usage:
-input_string_1 = "This is a string with [123] inside."
-result_1 = extract_integer_in_square_brackets(input_string_1)
-print(result_1)  # Output: 123
-
-input_string_2 = "No integer in this string."
-result_2 = extract_integer_in_square_brackets(input_string_2)
-print(result_2)  # Output: None
 
 """
 
@@ -64,28 +45,41 @@ HEADER_ROW = int(os.path.expanduser(os.getenv('HEADER_ROW', ''))) - 1
 
 
 TITLE_COLUMN = int(os.path.expanduser(os.getenv('TITLE_COLUMN', '')))-1
-SUBTITLE_COLUMN = int(os.path.expanduser(os.getenv('SUBTITLE_COLUMN', '')))-1
-APPEND_COLUMN = int(os.path.expanduser(os.getenv('APPEND_COLUMN', '')))
-
-ARG_COLUMN_V = os.path.expanduser(os.getenv('ARG_COLUMN', ''))
-if ARG_COLUMN_V:
-    ARG_COLUMN = int(ARG_COLUMN_V)-1
-else:
-    ARG_COLUMN = 0
-    
+SUBTITLE_COLUMN = os.path.expanduser(os.getenv('SUBTITLE_COLUMN', ''))
+ARG_COLUMN = os.path.expanduser(os.getenv('ARG_COLUMN', ''))
 
 MY_LAYOUT = os.path.expanduser(os.getenv('MY_LAYOUT', ''))
-
+LAYOUT_LIST = ''
 if not MY_LAYOUT:
     log ("layout empty")
-else:
-    log ("layout present")
-
+    COL_LIST = [TITLE_COLUMN]
 
     
-LAYOUT_LIST = extract_quoted_strings(MY_LAYOUT)
+    if SUBTITLE_COLUMN:
+        SUBTITLE_COLUMN = int(os.path.expanduser(os.getenv('SUBTITLE_COLUMN', '')))-1
+        COL_LIST.append (SUBTITLE_COLUMN)
 
-log (LAYOUT_LIST)
+    
+    if ARG_COLUMN:
+        ARG_COLUMN = int(ARG_COLUMN)-1
+        COL_LIST.append (ARG_COLUMN)
+
+else:
+    LAYOUT_LIST, COL_LIST = extract_quoted_strings(MY_LAYOUT)
+    #log (LAYOUT_LIST)
+    
+ 
+APPEND_COLUMN = os.path.expanduser(os.getenv('APPEND_COLUMN', ''))
+#log (COL_LIST)
+
+"""
+Title: "Uni [8] 🌼 [2]"
+Subtitle: "note: [2]"
+Arg: "fdssf [3]"
+"""
+    
+
+
 
 
     

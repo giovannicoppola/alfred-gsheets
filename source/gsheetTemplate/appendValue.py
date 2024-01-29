@@ -1,61 +1,38 @@
-import httplib2
+"""
+Appending a value to a Google Sheet with writing privileges
+Part of the gsheet workflow
+
+"""
+
 from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
-import re
 import json
 import gspread
 import sys
-from gspread.exceptions import APIError
+
 
 from config import log, MY_SHEET,MY_URL, KEYFILE, APPEND_COLUMN
 
 myString = sys.argv[1]
 
-def checkPermissions (myURL):
+def printError (myMessage, mySubtitle = "Check debugger for details"):
     result = {"items": []}
-
-    
-    file_id = re.search(r"/d/([^/]*)/", myURL).group(1)  # Extract file ID from URL
-    #log (file_id)
-
-
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(KEYFILE, ["https://www.googleapis.com/auth/drive"])
-    http = credentials.authorize(httplib2.Http())
-    service = build("drive", "v3", http=http)
-
-    # Use the Drive API to get the file (spreadsheet) metadata
-    file_metadata = service.files().get(fileId=file_id).execute()
-
-    # Get the name of the worksheet (spreadsheet)
-    worksheet_name = file_metadata['name']
-    try:
-        permissions = service.permissions().list(fileId=file_id).execute()
-        
-        for permission in permissions["permissions"]:
-        
-            if permission["role"] == "writer":
-                myMessage = "👍 Write permissions granted"
-                break
             
-        else:
-            myMessage = ("Write permission not granted")
-
-    except:
-        myMessage = "👎 CAZ"
-    
     result["items"].append({
-                "title": myMessage,
-                'subtitle': worksheet_name,
-                'valid': True,
+            "title": f"ERROR 🚨 {myMessage}",
+            'subtitle':  mySubtitle,
+            'valid': True,
+            "variables": {
                 
-                "icon": {
-                    "path": 'icon.png'
-                },
-                'arg': ""
-                    }) 
+                    },
+            
+            "icon": {
+                "path": 'icon.png'
+            },
+            'arg': "myArg" 
+                }) 
     print (json.dumps(result))  
-
-
+    sys.exit(1)
 
 def appendValue (myValue,myColumn):
     scopes = [
@@ -66,31 +43,39 @@ def appendValue (myValue,myColumn):
     file = gspread.authorize(credentials) # authenticate the JSON key with gspread
     
     sheet = file.open_by_url(MY_URL)
-    worksheet = sheet.worksheet(MY_SHEET)  #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+    worksheet = sheet.worksheet(MY_SHEET)  
 
-    #firstRow = len(worksheet.col_values(0))
+    
     lastrow = len(worksheet.col_values(myColumn))
     lastrow = lastrow+1
     try:
         # Attempt to update the cell
         worksheet.update_cell(lastrow, myColumn, myValue)
-        print("Cell updated successfully!")
+        print("✅ done!")
+        
 
-    except APIError as e:
+    except gspread.exceptions.APIError as e:
         # Handle API errors
-        print(f"APIError: {e}")
+        error_data = json.loads(e.response.text)
+        errorStatus  = f"🚨 {error_data['error']['status']}"
+        log(errorStatus)
+        print(errorStatus)
+        
         
     except Exception as e:
         # Handle other exceptions
-        print(f"An unexpected error occurred: {e}")
+        log(f"APIError: {e}")
+        printError(e)
+        
 
 
 
 
 def main ():
-    #checkPermissions(MY_URL)
-    
-    appendValue (myString, APPEND_COLUMN)
+    if not APPEND_COLUMN:
+        printError ("Append column not set")
+    else:
+        appendValue (myString, APPEND_COLUMN)
 
 
 if __name__ == '__main__':

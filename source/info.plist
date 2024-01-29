@@ -316,23 +316,23 @@ python3 cloneSheet.py</string>
 		<key>31D75F56-959F-411F-BC8A-8E29FC3D1086</key>
 		<dict>
 			<key>xpos</key>
-			<real>95</real>
+			<real>90</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>190</real>
 		</dict>
 		<key>53F39B0D-9C43-4E24-A373-E39CAA4845A7</key>
 		<dict>
 			<key>xpos</key>
-			<real>575</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>90</real>
+			<real>140</real>
 		</dict>
 		<key>6286DB17-C84B-4F43-8290-B1C0F928C7AB</key>
 		<dict>
 			<key>xpos</key>
-			<real>95</real>
+			<real>90</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>65</real>
 		</dict>
 		<key>659D9AAD-025B-494E-8D11-979DE23E77EE</key>
 		<dict>
@@ -341,30 +341,30 @@ python3 cloneSheet.py</string>
 			<key>note</key>
 			<string>Open Workflow config</string>
 			<key>xpos</key>
-			<real>1230</real>
+			<real>1225</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>110</real>
 		</dict>
 		<key>8806EA40-F57A-46EC-991C-DC63CA7B0EF6</key>
 		<dict>
 			<key>xpos</key>
-			<real>945</real>
+			<real>950</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>110</real>
 		</dict>
 		<key>E44AD3EB-3F0D-41A4-B8FC-2B692625CE3F</key>
 		<dict>
 			<key>xpos</key>
-			<real>705</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>110</real>
 		</dict>
 		<key>FD0931C4-1DD8-434F-A70B-D332E6B48858</key>
 		<dict>
 			<key>xpos</key>
-			<real>355</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>110</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -412,8 +412,10 @@ python3 cloneSheet.py</string>
 			<string>MainKeyword</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string></string>
+	<string>0.1</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>

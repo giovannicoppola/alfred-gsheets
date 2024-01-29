@@ -1,5 +1,5 @@
 {
-    "bundleid": "cazacazacaza",
+    "bundleid": "",
     "category": "Productivity",
     "connections": {
         "0443C1B7-C877-403A-9909-D52A574ADF36": [
@@ -49,7 +49,7 @@
         ]
     },
     "createdby": "giovanni",
-    "description": "",
+    "description": "Browse a Google Sheet",
     "disabled": false,
     "name": "gsheets - template",
     "objects": [
@@ -78,12 +78,12 @@
                 "queuedelayimmediatelyinitially": true,
                 "queuedelaymode": 0,
                 "queuemode": 1,
-                "runningsubtext": "wait wait wait",
-                "script": "export PYTHONPATH=\"$PWD/lib\"\npython3 browseSheet.py \"2\"",
+                "runningsubtext": "\u23f3 fetching data ...",
+                "script": "export PYTHONPATH=\"$PWD/lib\"\npython3 browseSheet.py",
                 "scriptargtype": 1,
                 "scriptfile": "",
-                "subtext": "",
-                "title": "Sheet List",
+                "subtext": "Browse {var:MY_SHEET}",
+                "title": "gsheet",
                 "type": 11,
                 "withspace": true
             },
@@ -124,7 +124,7 @@
         {
             "config": {
                 "lastpathcomponent": false,
-                "onlyshowifquerypopulated": false,
+                "onlyshowifquerypopulated": true,
                 "removeextension": false,
                 "text": "",
                 "title": ""
@@ -154,17 +154,16 @@
                 "argumenttrimmode": 0,
                 "argumenttype": 0,
                 "escaping": 102,
-                "keyword": "{var:MAIN_KEYWORD}::append",
                 "queuedelaycustom": 3,
                 "queuedelayimmediatelyinitially": true,
                 "queuedelaymode": 0,
                 "queuemode": 1,
-                "runningsubtext": "wait wait wait",
-                "script": "#!/bin/zsh\n\nmyText=$1\nmyTextLength=${#myText}\n\n\n\ncat << EOB\n{\"items\": [\n\n\t{\n\t\t\"title\": \"length: $myTextLength\",\n\t\t\"subtitle\": \"$1\",\n\t\t\"arg\": \"$1\"\n\t\t}\n\t\n\n\t\n\n]}\nEOB",
+                "runningsubtext": "",
+                "script": "#!/bin/zsh\n\nif [ -z \"$APPEND_COLUMN\" ]; then\ncat << EOB\n{\"items\": [\n\n\t{\n\t\t\"title\": \"\ud83d\udea8 Error: Append column not set\",\n\t\t\"subtitle\": \"Check Workflow configuration\"\n\t\t}\n\t\n\n\t\n\n]}\nEOB\n\n\nelse\nmyText=$1\nmyTextLength=${#myText}\n\n\n\ncat << EOB\n{\"items\": [\n\n\t{\n\t\t\"title\": \"Appending to column $APPEND_COLUMN: $1\",\n\t\t\"subtitle\": \"length: $myTextLength\",\n\t\t\"arg\": \"$1\"\n\t\t}\n\t\n\n\t\n\n]}\nEOB\nfi",
                 "scriptargtype": 1,
                 "scriptfile": "",
-                "subtext": "",
-                "title": "Append value to xxx column",
+                "subtext": "{var:MY_SHEET}",
+                "title": "Append value to column {var:APPEND_COLUMN}",
                 "type": 11,
                 "withspace": true
             },
@@ -176,32 +175,34 @@
     "readme": "",
     "uidata": {
         "0443C1B7-C877-403A-9909-D52A574ADF36": {
+            "colorindex": 5,
             "xpos": 100.0,
-            "ypos": 85.0
+            "ypos": 75.0
         },
         "4C91F60C-7C32-4E50-BAA9-93C6687FB6F1": {
-            "xpos": 910.0,
-            "ypos": 585.0
+            "xpos": 375.0,
+            "ypos": 515.0
         },
         "8AF507E8-A199-4C20-94E1-C88C059F2D12": {
             "xpos": 430.0,
             "ypos": 105.0
         },
         "D972334E-D38E-4740-A254-C30B2D2AEE5E": {
-            "xpos": 620.0,
+            "xpos": 630.0,
             "ypos": 305.0
         },
         "E43256F1-8519-491C-B9C8-32173EEF23CD": {
-            "xpos": 620.0,
-            "ypos": 585.0
+            "colorindex": 11,
+            "xpos": 100.0,
+            "ypos": 515.0
         },
         "EA194C6E-1CB2-4841-992D-DE140BDBC9F6": {
             "xpos": 630.0,
-            "ypos": 80.0
+            "ypos": 75.0
         },
         "FB5C9206-8F35-49CF-A63E-A2DD833C72BD": {
-            "xpos": 1125.0,
-            "ypos": 585.0
+            "xpos": 630.0,
+            "ypos": 515.0
         }
     },
     "userconfigurationconfig": [
@@ -219,7 +220,7 @@
         },
         {
             "config": {
-                "default": "",
+                "default": "https://docs.google.com/spreadsheets/d/1rflTHJeEHe82gWdROXYnpLa_9DvDNTjY3JWIIpQM9Hk/edit#gid=853558948",
                 "placeholder": "",
                 "required": true,
                 "trim": true
@@ -267,9 +268,9 @@
         },
         {
             "config": {
-                "default": "2",
+                "default": "",
                 "placeholder": "",
-                "required": true,
+                "required": false,
                 "trim": true
             },
             "description": "",
@@ -296,7 +297,7 @@
                 "trim": true,
                 "verticalsize": 3
             },
-            "description": "Title: [1]\nif set, will override the three fields above",
+            "description": "Custom layout, will need to contain at least one row with at least one column number in square brackets.\u2028\u2028Example:\u2028Title: \"myTitle [1] \ud83c\udf3c\"\nSubtitle: \"note: [2]\"\nArg: \"fdssf [3]\"\u2028\u2028If set, will override the three fields above",
             "label": "Advanced: Custom Layout",
             "type": "textarea",
             "variable": "MY_LAYOUT"
@@ -315,7 +316,7 @@
         },
         {
             "config": {
-                "default": "1",
+                "default": "",
                 "placeholder": "",
                 "required": false,
                 "trim": true

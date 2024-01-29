@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>cazacazacaza</string>
+	<string></string>
 	<key>category</key>
 	<string>Productivity</string>
 	<key>connections</key>
@@ -86,7 +86,7 @@
 	<key>createdby</key>
 	<string>giovanni</string>
 	<key>description</key>
-	<string></string>
+	<string>Browse a Google Sheet</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -140,18 +140,18 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>wait wait wait</string>
+				<string>⏳ fetching data ...</string>
 				<key>script</key>
 				<string>export PYTHONPATH="$PWD/lib"
-python3 browseSheet.py "$1"</string>
+python3 browseSheet.py</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>Browse {var:MY_SHEET}</string>
 				<key>title</key>
-				<string>Sheet List</string>
+				<string>gsheet</string>
 				<key>type</key>
 				<integer>11</integer>
 				<key>withspace</key>
@@ -221,7 +221,7 @@ python3 browseSheet.py "$1"</string>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
@@ -275,8 +275,6 @@ python3 appendValue.py "$1"</string>
 				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
-				<key>keyword</key>
-				<string>{var:MAIN_KEYWORD}::append</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -286,10 +284,27 @@ python3 appendValue.py "$1"</string>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>wait wait wait</string>
+				<string></string>
 				<key>script</key>
 				<string>#!/bin/zsh
 
+if [ -z "$APPEND_COLUMN" ]; then
+cat &lt;&lt; EOB
+{"items": [
+
+	{
+		"title": "🚨 Error: Append column not set",
+		"subtitle": "Check Workflow configuration"
+		}
+	
+
+	
+
+]}
+EOB
+
+
+else
 myText=$1
 myTextLength=${#myText}
 
@@ -299,8 +314,8 @@ cat &lt;&lt; EOB
 {"items": [
 
 	{
-		"title": "length: $myTextLength",
-		"subtitle": "$1",
+		"title": "Appending to column $APPEND_COLUMN: $1",
+		"subtitle": "length: $myTextLength",
 		"arg": "$1"
 		}
 	
@@ -308,15 +323,16 @@ cat &lt;&lt; EOB
 	
 
 ]}
-EOB</string>
+EOB
+fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>{var:MY_SHEET}</string>
 				<key>title</key>
-				<string>Append value to xxx column</string>
+				<string>Append value to column {var:APPEND_COLUMN}</string>
 				<key>type</key>
 				<integer>11</integer>
 				<key>withspace</key>
@@ -336,15 +352,17 @@ EOB</string>
 	<dict>
 		<key>0443C1B7-C877-403A-9909-D52A574ADF36</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>100</real>
 			<key>ypos</key>
-			<real>85</real>
+			<real>75</real>
 		</dict>
 		<key>4C91F60C-7C32-4E50-BAA9-93C6687FB6F1</key>
 		<dict>
 			<key>xpos</key>
-			<real>410</real>
+			<real>375</real>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
@@ -358,14 +376,16 @@ EOB</string>
 		<key>D972334E-D38E-4740-A254-C30B2D2AEE5E</key>
 		<dict>
 			<key>xpos</key>
-			<real>620</real>
+			<real>630</real>
 			<key>ypos</key>
 			<real>305</real>
 		</dict>
 		<key>E43256F1-8519-491C-B9C8-32173EEF23CD</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>120</real>
+			<real>100</real>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
@@ -374,12 +394,12 @@ EOB</string>
 			<key>xpos</key>
 			<real>630</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>75</real>
 		</dict>
 		<key>FB5C9206-8F35-49CF-A63E-A2DD833C72BD</key>
 		<dict>
 			<key>xpos</key>
-			<real>625</real>
+			<real>630</real>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
@@ -495,7 +515,7 @@ EOB</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>1</string>
+				<string></string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -516,7 +536,7 @@ EOB</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>1</string>
+				<string></string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -581,7 +601,7 @@ Arg: "fdssf [3]"  If set, will override the three fields above</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>1</string>
+				<string></string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>

@@ -1,5 +1,5 @@
 """
-CloneSheets
+CloneSheet
 A script to clone the current workflow to create a new one
 Part of the alfred-sheets Workflow
 Giovanni Coppola
@@ -19,11 +19,10 @@ MyNewSheet = os.getenv('NEW_SHEET')
 MyEstimatedColumns = os.getenv('EST_COLS')
 NewWorksheetName = os.getenv('NEW_WORKSHEET_NAME')
 NumberColumns = int(os.getenv('N_COLS'))
+WriteP = int(os.getenv('WRITE_P'))
 
 # Generate a random UUID string
 random_string = str(uuid.uuid4())
-random_string = "testingtesting"
-
 newBundleID = f"giovanni-gsheets_{random_string}"
 
 
@@ -31,7 +30,7 @@ newBundleID = f"giovanni-gsheets_{random_string}"
 def plist2JSON ():
     """
     worker function to export plist files to JSON for troubleshooting
-    TO BE DELETED or commented out
+    
     """
     with open('gsheetTemplate/info.plist', 'rb') as plist_file:
         plist_data = plistlib.load(plist_file)
@@ -54,10 +53,8 @@ def editPrefs (myPrefFile, newPref):
     with open(myPrefFile, 'rb') as plist_file:
         plist_json = plistlib.load(plist_file)
     try:
+        # currently not making any changes. Left it here in case I need to set some prefs fields
         
-        #plist_json ['MY_LAYOUT'] = "cazzone"
-        #plist_json ['MY_URL'] = MyNewURL
-        plist_json ['MY_SHEET'] = MyNewSheet
         # Open the .plist file in binary mode and write the data
         with open(newPref, 'wb') as plist_file:
             plistlib.dump(plist_json, plist_file, fmt=plistlib.FMT_XML)  # FMT_XML for XML format
@@ -69,7 +66,8 @@ def editPrefs (myPrefFile, newPref):
     
 
 def editInfo (myInfoFile, newInfo,newBundleID):
-    ## choosing a worksheet name and keyword
+
+## choosing a worksheet name and keyword
     words = NewWorksheetName.split()
 
     if len(words) > 0:
@@ -81,7 +79,7 @@ def editInfo (myInfoFile, newInfo,newBundleID):
     myWorkflowName = f'gsheets-{myfirstWord}'
     
     
-
+    # setting default columns based on the number of columns in the sheet
     if NumberColumns > 2:
         SubtitleCol = 2    
         ArgCol = 3
@@ -114,6 +112,16 @@ def editInfo (myInfoFile, newInfo,newBundleID):
             for item in plist_json["userconfigurationconfig"]
         ]
 
+        # Setting the  APPEND keyword and column if the user has writing privileges
+        if WriteP:
+            plist_json['objects'] = [
+                {**item, "config": {**item["config"], "keyword": "{var:MAIN_KEYWORD}::append"}} if item["uid"] == "E43256F1-8519-491C-B9C8-32173EEF23CD" else item
+                for item in plist_json["objects"]
+            ]
+            plist_json['userconfigurationconfig'] = [
+            {**item, "config": {**item["config"], "default": 1}} if item["variable"] == "APPEND_COLUMN" else item
+            for item in plist_json["userconfigurationconfig"]
+            ]   
        # Setting default columns if ncol >1 (all are 1 by default)
         if NumberColumns > 1:
             plist_json['userconfigurationconfig'] = [
@@ -127,7 +135,7 @@ def editInfo (myInfoFile, newInfo,newBundleID):
             ]
         
 
-         # Setting key file
+        # Setting key file
         plist_json['userconfigurationconfig'] = [
             {**item, "config": {**item["config"], "default": KEYFILE}} if item["variable"] == "KEYFILE" else item
             for item in plist_json["userconfigurationconfig"]
@@ -149,7 +157,7 @@ def editInfo (myInfoFile, newInfo,newBundleID):
 def cloneWorkflow():
     new_folder_name = f"{ALFRED_WORKFLOW_DIR}/{newBundleID}"
     
-    # Remove the folder already exists
+    # Remove the folder if already exists
     if os.path.exists(new_folder_name):
         log ("folder exists, removing")
         shutil.rmtree(new_folder_name)
@@ -170,15 +178,15 @@ def cloneWorkflow():
         # Check if the item is a file
         if os.path.isfile(item_path):
             if item == 'info.plist':
-            # insert the plist editing here
+            # editing info.plist
                 editInfo (item_path,new_item_path, newBundleID)
-                log ("found info.plist")
+                log ("edited info.plist")
                 continue
 
             elif item == 'prefs.plist':
-                # insert the prefs editing here
+                # editing prefs.plist
                 editPrefs (item_path,new_item_path)
-                log ("found prefs.plist")
+                log ("edited prefs.plist")
                 continue
                 
             else:
@@ -217,7 +225,7 @@ def printDone ():
 
 
 if __name__ == "__main__":
-    cloneWorkflow()
     #plist2JSON ()
+    cloneWorkflow()
     printDone()
 
