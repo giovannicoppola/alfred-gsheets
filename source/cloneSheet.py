@@ -13,6 +13,7 @@ import uuid
 from config import log, ALFRED_WORKFLOW_DIR, KEYFILE
 import plistlib
 import json
+import time
 
 MyNewURL = os.getenv('NEW_URL')
 MyNewSheet = os.getenv('NEW_SHEET')
@@ -50,10 +51,27 @@ def plist2JSON ():
     
 
 def editPrefs (myPrefFile, newPref):
+    # setting default columns based on the number of columns in the sheet
+    if NumberColumns > 2:
+        SubtitleCol = 2    
+        ArgCol = 3
+    elif NumberColumns > 1:
+        SubtitleCol = ArgCol = 2    
+    
     with open(myPrefFile, 'rb') as plist_file:
         plist_json = plistlib.load(plist_file)
     try:
-        # currently not making any changes. Left it here in case I need to set some prefs fields
+        
+        # Setting default columns if ncol >1 (all are 1 by default)
+        if NumberColumns > 1:
+            plist_json ["ARG_COLUMN"] = str(ArgCol)
+            plist_json  ["SUBTITLE_COLUMN"] = str(SubtitleCol)
+            
+        
+        # Setting the APPEND column if the user has writing privileges
+        if WriteP:
+            plist_json ["APPEND_COLUMN"] = "1"
+            
         
         # Open the .plist file in binary mode and write the data
         with open(newPref, 'wb') as plist_file:
@@ -79,12 +97,6 @@ def editInfo (myInfoFile, newInfo,newBundleID):
     myWorkflowName = f'gsheets-{myfirstWord}'
     
     
-    # setting default columns based on the number of columns in the sheet
-    if NumberColumns > 2:
-        SubtitleCol = 2    
-        ArgCol = 3
-    elif NumberColumns > 1:
-        SubtitleCol = ArgCol = 2    
         
 
     with open(myInfoFile, 'rb') as plist_file:
@@ -112,29 +124,14 @@ def editInfo (myInfoFile, newInfo,newBundleID):
             for item in plist_json["userconfigurationconfig"]
         ]
 
-        # Setting the  APPEND keyword and column if the user has writing privileges
+        # Setting the  APPEND keyword  if the user has writing privileges
         if WriteP:
             plist_json['objects'] = [
                 {**item, "config": {**item["config"], "keyword": "{var:MAIN_KEYWORD}::append"}} if item["uid"] == "E43256F1-8519-491C-B9C8-32173EEF23CD" else item
                 for item in plist_json["objects"]
-            ]
-            plist_json['userconfigurationconfig'] = [
-            {**item, "config": {**item["config"], "default": 1}} if item["variable"] == "APPEND_COLUMN" else item
-            for item in plist_json["userconfigurationconfig"]
-            ]   
-       # Setting default columns if ncol >1 (all are 1 by default)
-        if NumberColumns > 1:
-            plist_json['userconfigurationconfig'] = [
-                {**item, "config": {**item["config"], "default": SubtitleCol}} if item["variable"] == "SUBTITLE_COLUMN" else item
-                for item in plist_json["userconfigurationconfig"]
-            ]
-
-            plist_json['userconfigurationconfig'] = [
-            {**item, "config": {**item["config"], "default": ArgCol}} if item["variable"] == "ARG_COLUMN" else item
-            for item in plist_json["userconfigurationconfig"]
-            ]
-        
-
+                ]
+               
+       
         # Setting key file
         plist_json['userconfigurationconfig'] = [
             {**item, "config": {**item["config"], "default": KEYFILE}} if item["variable"] == "KEYFILE" else item
@@ -227,5 +224,6 @@ def printDone ():
 if __name__ == "__main__":
     #plist2JSON ()
     cloneWorkflow()
+    time.sleep (1) 
     printDone()
 
