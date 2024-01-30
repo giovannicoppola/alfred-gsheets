@@ -109,7 +109,7 @@ def fetchValues (spreadsheet_url):
     #log (column_headers)
     SHEET_NCOL = len (column_headers)
     if (all(num <= SHEET_NCOL-1 for num in COL_LIST)) is False:
-        myError =  f"one or more of the column numbers {[x + 1 for x in COL_LIST]} is greater than the number of columns ({SHEET_NCOL})"
+        myError =  f"at least one of the column numbers {[x + 1 for x in COL_LIST]} is greater than the number of columns ({SHEET_NCOL})"
         log (myError)
         printError ("check the column numbers (or the header row) in configuration",myError)
     

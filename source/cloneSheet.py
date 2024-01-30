@@ -103,8 +103,10 @@ def editInfo (myInfoFile, newInfo,newBundleID):
         plist_json = plistlib.load(plist_file)
     try:
         
+        plist_json ['description'] = f"Browse a Google Sheet: {NewWorksheetName}"
         plist_json ['bundleid'] = newBundleID
         plist_json ['name'] = myWorkflowName
+        
         
         # Setting MY_URL
         plist_json['userconfigurationconfig'] = [
