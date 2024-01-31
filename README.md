@@ -1,23 +1,23 @@
 # alfred-gsheets
  
 
-Inspired by `I-sheet-you-not`, this Workflow provides the means to create new Workflows to access individual Google Sheets.
+Inspired by `I-sheet-you-not`, this Workflow creates new Workflows to access individual Google Sheets.
 
 ![](images/gsheets.gif)
 
 
-## Usage
+## 🚀Usage
 1. Open a Google Sheet in your browser. 
-2. Launch `alfred-sheets` via keyword (default: `gshe`) or hotkey
-3. `alfred-sheets` will check the frontmost page with one of three outcomes:
+2. Launch `alfred-gsheets` via keyword (default: `gshe`) or hotkey
+3. `alfred-gsheets` will check the frontmost page with one of three outcomes:
 	1. The website is not a Google Sheet ▶️ check URL
 	2. The website is a Google Sheet but you don't have the right permissions ▶️ review the `Setting up` section
 	3. The website is a Google Sheet and you have at least viewing privileges ▶️ go to step 4
-4. `alfred-sheets` will list the individual worksheets. Select one to generate an `alfred-sheets` Workflow instance to browse that Sheet. 
-5. Once a new Workflow is created, ↩️ will bring you to its `Workflow Configuration`, where changes to keyword etc. can be made:
- - Header row (column headers). Set this to 0 if no header
- - columns for Tetle (required), subtitle and argument. 
- 	- Alternatively, a custom layout can be set as follows: up to three lines (for Title, Subtitle, and Arg), with layout text in quotes and column numbers in square brackets. Example:
+4. `alfred-gsheets` will list the individual worksheets. Select one to generate a `alfred-gsheets` Workflow instance to browse that Sheet. 
+5. Once a new Workflow is created, ↩️ will lead you to its `Workflow Configuration`, where changes to keyword etc. can be made:
+- `Header Row` (column headers). Row containing the column headers. Set this to 0 if no header.
+- columns for Alfred's `Title` (required), `Subtitle` and `Arg`. 
+ 	- Alternatively, a custom layout can be set as follows: up to three lines (for Title, Subtitle, and Arg), with layout text in quotes and column numbers in square brackets. For example:
 
 ```
 Title: "College 🎓: [1]"
@@ -27,9 +27,12 @@ Arg: "URL: [3]"
 ```
 
 - *Note:* if a custom layout is used, the Title, Subtitle and Arg fields will be ignored. 
-- `Append column`: If you have writing privileges, you can indicaate a column to which append values via `alfred-gsheets` using a keyword (default: `[main workflow keyword]::append`, e.g. `uni::append`) or hotkey
+- `Append column`: If you have writing privileges on your Google Sheet (see `Setting up`), you can indicaate a column to which append values via `alfred-gsheets` using a keyword (default: `[main workflow keyword]::append`, e.g. `uni::append`) or hotkey
+
+### 🧮 New workflow: usage
 - entering the main keyword (default: first three letters of the workflow name) will list sheet columns according to the Title, Subtitle, and Arg variables, or custom layout. 
-- If the argument is a URL, `Enter` ↩️ will open it in your browser
+- If the argument is a URL, `Enter` ↩️ will open it in your browser. 
+- If not, `Enter` ↩️ will copy it to the clipboard
 
 
  

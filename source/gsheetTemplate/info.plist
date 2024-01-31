@@ -435,7 +435,25 @@ fi</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># 🧮 [[New workflow name]]: usage
+- entering the main keyword (default: first three letters of the workflow name) will list sheet columns according to the Title, Subtitle, and Arg variables, or custom layout. 
+- If the argument is a URL, `Enter` ↩️ will open it in your browser. 
+- If not, `Enter` ↩️ will copy it to the clipboard
+
+
+## ⚙️ Other options
+- `Header Row` (column headers). Row containing the column headers. Set this to 0 if no header.
+- columns for Alfred's `Title` (required), `Subtitle` and `Arg`. 
+ 	- Alternatively, a custom layout can be set as follows: up to three lines (for Title, Subtitle, and Arg), with layout text in quotes and column numbers in square brackets. For example:
+
+ 
+`Title: "College 🎓: [1]"`
+`Subtitle: "City: [2]"`
+`Arg: "URL: [3]"`
+ 
+
+- *Note:* if a custom layout is used, the Title, Subtitle and Arg fields will be ignored. 
+- `Append column`: If you have writing privileges on your Google Sheet (see `Setting up`), you can indicaate a column to which append values via `alfred-gsheets` using a keyword (default: `[main workflow keyword]::append`, e.g. `uni::append`) or hotkey</string>
 	<key>uidata</key>
 	<dict>
 		<key>0443C1B7-C877-403A-9909-D52A574ADF36</key>
@@ -554,6 +572,27 @@ fi</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>File with Google API account credentials (see 'Setting up')</string>
+			<key>label</key>
+			<string>Key File</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>KEYFILE</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>1</string>
 				<key>placeholder</key>
 				<string></string>
@@ -563,7 +602,7 @@ fi</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Row number (enter 0 for no header)</string>
+			<string>Row containing the column headers. Set to 0 if no header.</string>
 			<key>label</key>
 			<string>Header Row</string>
 			<key>type</key>
@@ -605,7 +644,7 @@ fi</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Number of the column to be used for Alfred's Title (required)</string>
 			<key>label</key>
 			<string>Title column</string>
 			<key>type</key>
@@ -626,7 +665,7 @@ fi</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Number of the column to be used for Alfred's Subtitle</string>
 			<key>label</key>
 			<string>Subtitle column</string>
 			<key>type</key>
@@ -647,7 +686,7 @@ fi</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Number of the column to be used for Alfred's Arg</string>
 			<key>label</key>
 			<string>Argument column</string>
 			<key>type</key>
@@ -670,34 +709,13 @@ fi</string>
 			<key>description</key>
 			<string>Custom layout, will need to contain at least one row with at least one column number in square brackets.  Example: Title: "myTitle [1] 🌼"
 Subtitle: "note: [2]"
-Arg: "fdssf [3]"  If set, will override the three fields above</string>
+Arg: "[3]"  If set, will override the three fields above</string>
 			<key>label</key>
 			<string>Advanced: Custom Layout</string>
 			<key>type</key>
 			<string>textarea</string>
 			<key>variable</key>
 			<string>MY_LAYOUT</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>2</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Key File</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>KEYFILE</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -712,7 +730,7 @@ Arg: "fdssf [3]"  If set, will override the three fields above</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Column to which append new values. Will only work if the sheet has writing permissions</string>
+			<string>Column to which new values will be appended. Will only work if the sheet has writing permissions</string>
 			<key>label</key>
 			<string>Append column</string>
 			<key>type</key>

@@ -16,6 +16,14 @@
                 "vitoclose": false
             }
         ],
+        "1AD5DA24-6434-4D57-8D8A-48DD025E03A9": [
+            {
+                "destinationuid": "0443C1B7-C877-403A-9909-D52A574ADF36",
+                "modifiers": 0,
+                "modifiersubtext": "",
+                "vitoclose": false
+            }
+        ],
         "4C91F60C-7C32-4E50-BAA9-93C6687FB6F1": [
             {
                 "destinationuid": "FB5C9206-8F35-49CF-A63E-A2DD833C72BD",
@@ -34,6 +42,14 @@
             },
             {
                 "destinationuid": "D972334E-D38E-4740-A254-C30B2D2AEE5E",
+                "modifiers": 0,
+                "modifiersubtext": "",
+                "vitoclose": false
+            }
+        ],
+        "A5B73D9C-144E-479B-B7F5-DA8BB5BECFC9": [
+            {
+                "destinationuid": "E43256F1-8519-491C-B9C8-32173EEF23CD",
                 "modifiers": 0,
                 "modifiersubtext": "",
                 "vitoclose": false
@@ -64,6 +80,23 @@
             "type": "alfred.workflow.action.openurl",
             "uid": "EA194C6E-1CB2-4841-992D-DE140BDBC9F6",
             "version": 1
+        },
+        {
+            "config": {
+                "action": 0,
+                "argument": 0,
+                "focusedappvariable": false,
+                "focusedappvariablename": "",
+                "hotkey": 0,
+                "hotmod": 0,
+                "hotstring": "",
+                "leftcursor": false,
+                "modsmode": 0,
+                "relatedAppsMode": 0
+            },
+            "type": "alfred.workflow.trigger.hotkey",
+            "uid": "1AD5DA24-6434-4D57-8D8A-48DD025E03A9",
+            "version": 2
         },
         {
             "config": {
@@ -170,39 +203,64 @@
             "type": "alfred.workflow.input.scriptfilter",
             "uid": "E43256F1-8519-491C-B9C8-32173EEF23CD",
             "version": 3
+        },
+        {
+            "config": {
+                "action": 0,
+                "argument": 0,
+                "focusedappvariable": false,
+                "focusedappvariablename": "",
+                "hotkey": 0,
+                "hotmod": 0,
+                "hotstring": "",
+                "leftcursor": false,
+                "modsmode": 0,
+                "relatedAppsMode": 0
+            },
+            "type": "alfred.workflow.trigger.hotkey",
+            "uid": "A5B73D9C-144E-479B-B7F5-DA8BB5BECFC9",
+            "version": 2
         }
     ],
-    "readme": "",
+    "readme": "# \ud83e\uddee [[New workflow name]]: usage\n- entering the main keyword (default: first three letters of the workflow name) will list sheet columns according to the Title, Subtitle, and Arg variables, or custom layout. \n- If the argument is a URL, `Enter` \u21a9\ufe0f will open it in your browser. \n- If not, `Enter` \u21a9\ufe0f will copy it to the clipboard\n\n\n## \u2699\ufe0f Other options\n- `Header Row` (column headers). Row containing the column headers. Set this to 0 if no header.\n- columns for Alfred's `Title` (required), `Subtitle` and `Arg`. \n \t- Alternatively, a custom layout can be set as follows: up to three lines (for Title, Subtitle, and Arg), with layout text in quotes and column numbers in square brackets. For example:\n\n \n`Title: \"College \ud83c\udf93: [1]\"`\n`Subtitle: \"City: [2]\"`\n`Arg: \"URL: [3]\"`\n \n\n- *Note:* if a custom layout is used, the Title, Subtitle and Arg fields will be ignored. \n- `Append column`: If you have writing privileges on your Google Sheet (see `Setting up`), you can indicaate a column to which append values via `alfred-gsheets` using a keyword (default: `[main workflow keyword]::append`, e.g. `uni::append`) or hotkey",
     "uidata": {
         "0443C1B7-C877-403A-9909-D52A574ADF36": {
             "colorindex": 5,
-            "xpos": 100.0,
-            "ypos": 75.0
+            "xpos": 365.0,
+            "ypos": 135.0
+        },
+        "1AD5DA24-6434-4D57-8D8A-48DD025E03A9": {
+            "xpos": 130.0,
+            "ypos": 135.0
         },
         "4C91F60C-7C32-4E50-BAA9-93C6687FB6F1": {
-            "xpos": 375.0,
-            "ypos": 515.0
+            "xpos": 640.0,
+            "ypos": 575.0
         },
         "8AF507E8-A199-4C20-94E1-C88C059F2D12": {
-            "xpos": 430.0,
-            "ypos": 105.0
+            "xpos": 695.0,
+            "ypos": 165.0
+        },
+        "A5B73D9C-144E-479B-B7F5-DA8BB5BECFC9": {
+            "xpos": 130.0,
+            "ypos": 575.0
         },
         "D972334E-D38E-4740-A254-C30B2D2AEE5E": {
-            "xpos": 630.0,
-            "ypos": 305.0
+            "xpos": 895.0,
+            "ypos": 365.0
         },
         "E43256F1-8519-491C-B9C8-32173EEF23CD": {
             "colorindex": 11,
-            "xpos": 100.0,
-            "ypos": 515.0
+            "xpos": 365.0,
+            "ypos": 575.0
         },
         "EA194C6E-1CB2-4841-992D-DE140BDBC9F6": {
-            "xpos": 630.0,
-            "ypos": 75.0
+            "xpos": 895.0,
+            "ypos": 135.0
         },
         "FB5C9206-8F35-49CF-A63E-A2DD833C72BD": {
-            "xpos": 630.0,
-            "ypos": 515.0
+            "xpos": 895.0,
+            "ypos": 575.0
         }
     },
     "userconfigurationconfig": [
@@ -232,12 +290,24 @@
         },
         {
             "config": {
+                "default": "",
+                "filtermode": 2,
+                "placeholder": "",
+                "required": true
+            },
+            "description": "File with Google API account credentials (see 'Setting up')",
+            "label": "Key File",
+            "type": "filepicker",
+            "variable": "KEYFILE"
+        },
+        {
+            "config": {
                 "default": "1",
                 "placeholder": "",
-                "required": false,
+                "required": true,
                 "trim": true
             },
-            "description": "Row number",
+            "description": "Row containing the column headers. Set to 0 if no header.",
             "label": "Header Row",
             "type": "textfield",
             "variable": "HEADER_ROW"
@@ -261,7 +331,7 @@
                 "required": true,
                 "trim": true
             },
-            "description": "",
+            "description": "Number of the column to be used for Alfred's Title (required)",
             "label": "Title column",
             "type": "textfield",
             "variable": "TITLE_COLUMN"
@@ -273,7 +343,7 @@
                 "required": false,
                 "trim": true
             },
-            "description": "",
+            "description": "Number of the column to be used for Alfred's Subtitle",
             "label": "Subtitle column",
             "type": "textfield",
             "variable": "SUBTITLE_COLUMN"
@@ -285,7 +355,7 @@
                 "required": false,
                 "trim": true
             },
-            "description": "",
+            "description": "Number of the column to be used for Alfred's Arg",
             "label": "Argument column",
             "type": "textfield",
             "variable": "ARG_COLUMN"
@@ -297,22 +367,10 @@
                 "trim": true,
                 "verticalsize": 3
             },
-            "description": "Custom layout, will need to contain at least one row with at least one column number in square brackets.\u2028\u2028Example:\u2028Title: \"myTitle [1] \ud83c\udf3c\"\nSubtitle: \"note: [2]\"\nArg: \"fdssf [3]\"\u2028\u2028If set, will override the three fields above",
+            "description": "Custom layout, will need to contain at least one row with at least one column number in square brackets.\u2028\u2028Example:\u2028Title: \"myTitle [1] \ud83c\udf3c\"\nSubtitle: \"note: [2]\"\nArg: \"[3]\"\u2028\u2028If set, will override the three fields above",
             "label": "Advanced: Custom Layout",
             "type": "textarea",
             "variable": "MY_LAYOUT"
-        },
-        {
-            "config": {
-                "default": "",
-                "filtermode": 2,
-                "placeholder": "",
-                "required": true
-            },
-            "description": "",
-            "label": "Key File",
-            "type": "filepicker",
-            "variable": "KEYFILE"
         },
         {
             "config": {
@@ -321,7 +379,7 @@
                 "required": false,
                 "trim": true
             },
-            "description": "Column to which append new values. Will only work if the sheet has writing permissions",
+            "description": "Column to which new values will be appended. Will only work if the sheet has writing permissions",
             "label": "Append column",
             "type": "textfield",
             "variable": "APPEND_COLUMN"

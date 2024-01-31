@@ -93,7 +93,7 @@ def editInfo (myInfoFile, newInfo,newBundleID):
         myfirstWord = words[0]
     else:
         # If no space, return the first three letters
-        myfirstWord = NewWorksheetName[:3]
+        myfirstWord = NewWorksheetName[:3].casefold()
     myWorkflowName = f'gsheets-{myfirstWord}'
     
     
@@ -122,7 +122,7 @@ def editInfo (myInfoFile, newInfo,newBundleID):
 
         # Setting MAIN_KEYWORD (default: first 3 letters of Worksheet name)
         plist_json['userconfigurationconfig'] = [
-            {**item, "config": {**item["config"], "default": NewWorksheetName[:3]}} if item["variable"] == "MAIN_KEYWORD" else item
+            {**item, "config": {**item["config"], "default": NewWorksheetName[:3].casefold()}} if item["variable"] == "MAIN_KEYWORD" else item
             for item in plist_json["userconfigurationconfig"]
         ]
 
@@ -132,8 +132,12 @@ def editInfo (myInfoFile, newInfo,newBundleID):
                 {**item, "config": {**item["config"], "keyword": "{var:MAIN_KEYWORD}::append"}} if item["uid"] == "E43256F1-8519-491C-B9C8-32173EEF23CD" else item
                 for item in plist_json["objects"]
                 ]
-               
-       
+        
+        # Setting the workflow name in readme
+        myReadme = plist_json ['readme']
+        newREADME = myReadme.replace("[[New workflow name]]", myWorkflowName)
+        plist_json ['readme'] = newREADME
+
         # Setting key file
         plist_json['userconfigurationconfig'] = [
             {**item, "config": {**item["config"], "default": KEYFILE}} if item["variable"] == "KEYFILE" else item
