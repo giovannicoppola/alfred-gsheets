@@ -3,6 +3,7 @@
 
 Inspired by `I-sheet-you-not`, this Workflow provides the means to create new Workflows to access individual Google Sheets.
 
+![](images/gsheets.gif)
 
 
 ## Usage
@@ -46,16 +47,13 @@ Steps 1-7 are needed to access public Google Sheets. An additional step 8 is nee
 1. Using the `Select a project` dropdown menu, create a new project (or select an existing one).
 1. Click on `+ ENABLE APIS AND SERVICES` at the top of the page, then select  `Google Sheets API` for your project. Click on `ENABLE`
 1. From the API Console, click `Credentials` in the sidebar, then click on `+ CREATE CREDENTIALS` at the top of the page and select `Service account` to create a new service account key
-	1. *What data will you be accessing?* User data
-	1. enter an account name (e.g. "MyAlfredAPI") and a description (e.g. "for Alfred Workflow")
-	2. select `application data` 
-	3. *Are you planning to use this API with Compute Engine, Kubernetes Engine, App Engine, or Cloud Functions?* No
-2. download the JSON file containing your service account credentials.
-3. move that file to your preferred location, then enter the path to the file in `Key File` in `Workflow configuration`. This is required for the workflow to work. 
+1. enter an account name (e.g. "MyAlfredAPI") and a description (e.g. "for Alfred Workflow")
+2. in `Manage service accounts`, select `Keys` and create a new JSON key, which will be downloaded onto your computer. This key contains your account credentials.
+3. Move that file to your preferred location, then enter the path to the file in `Key File` in `Workflow configuration`. This is required for the workflow to work. 
 
 ### If the Google sheet is private
-1. Share the Google Sheet with the service account email address:
-	- The service account email address can be found in the JSON file downloaded in the previous step. Share the Google Sheet with this email address, granting it the appropriate access permissions.
+1. Copy the service account email address (go to `Manage service accounts`, hover over the email of your project, a copy icon will appear).
+1. Share the private Google Sheet with the service account email address, granting it the appropriate access permissions.
 
 
 
