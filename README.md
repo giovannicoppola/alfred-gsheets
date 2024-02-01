@@ -1,7 +1,7 @@
 # alfred-gsheets
  
 
-Inspired by `I-sheet-you-not`, this Workflow creates new Workflows to access individual Google Sheets.
+Inspired by `I-sheet-you-not`, this Workflow creates new Workflows to access individual Google Sheets with Alfred.
 
 ![](images/gsheets.gif)
 
@@ -23,11 +23,10 @@ Inspired by `I-sheet-you-not`, this Workflow creates new Workflows to access ind
 Title: "College 🎓: [1]"
 Subtitle: "City: [2]"
 Arg: "URL: [3]"
-
 ```
 
 - *Note:* if a custom layout is used, the Title, Subtitle and Arg fields will be ignored. 
-- `Append column`: If you have writing privileges on your Google Sheet (see `Setting up`), you can indicaate a column to which append values via `alfred-gsheets` using a keyword (default: `[main workflow keyword]::append`, e.g. `uni::append`) or hotkey
+- `Append column`: If you have writing privileges on your Google Sheet (see `Setting up`), you can indicate a column to which append values via `alfred-gsheets` using a keyword (default: `[main workflow keyword]::append`, e.g. `uni::append`) or hotkey
 
 ### 🧮 New workflow: usage
 - entering the main keyword (default: first three letters of the workflow name) will list sheet columns according to the Title, Subtitle, and Arg variables, or custom layout. 
@@ -38,7 +37,7 @@ Arg: "URL: [3]"
  
 
 ## Setting up ⚙️
-*Note: this setup is more complex than the average workflow. I tried to document all the steps below, feel free to point to unclear steps or instructions. A screencast of the process is here.*
+*Note: this setup is more complex than the average workflow. I tried to document all the steps below, feel free to point to unclear steps or instructions. A screencast of the process is [here](https://github.com/giovannicoppola/alfred-gsheets/blob/main/images/googleAPIsetup.gif).*
 
 Steps 1-7 are needed to access public Google Sheets. An additional step 8 is needed to access private Google Sheets. 
 
@@ -56,15 +55,23 @@ Steps 1-7 are needed to access public Google Sheets. An additional step 8 is nee
 
 ### If the Google sheet is private
 1. Copy the service account email address (go to `Manage service accounts`, hover over the email of your project, a copy icon will appear).
+![](images/screenshot_email.png)
 1. Share the private Google Sheet with the service account email address, granting it the appropriate access permissions.
 
 
 
-
+# Changelog
+- 2024-02-01: first release (version 0.1)
 
 # Thanks
 - [tutorial](https://www.makeuseof.com/tag/read-write-google-sheets-python/) on how to access google sheets via Python 
 - Icons from [Flaticon](www.flaticon.com) 
 	- https://www.flaticon.com/free-icon/table-cell_6099818
 	- https://www.flaticon.com/free-icon/add-button_8246338
+	- https://www.flaticon.com/free-icon/spreadsheet_3919650
+
+
+# Feedback 🧐
+
+Feedback welcome! If you notice a bug, or have ideas for new features, please feel free to get in touch either here, or on the [Alfred](https://www.alfredforum.com) forum. 
 

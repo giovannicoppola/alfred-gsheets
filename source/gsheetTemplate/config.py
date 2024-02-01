@@ -72,12 +72,7 @@ else:
 APPEND_COLUMN = os.path.expanduser(os.getenv('APPEND_COLUMN', ''))
 #log (COL_LIST)
 
-"""
-Title: "Uni [8] 🌼 [2]"
-Subtitle: "note: [2]"
-Arg: "fdssf [3]"
-"""
-    
+
 
 
 

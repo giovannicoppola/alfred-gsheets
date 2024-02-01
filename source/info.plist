@@ -90,7 +90,7 @@
 	<key>createdby</key>
 	<string>giovanni</string>
 	<key>description</key>
-	<string></string>
+	<string>Access your Google Sheets with Alfred</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -319,7 +319,7 @@ Inspired by `I-sheet-you-not`, this Workflow creates new Workflows to access ind
 2. Launch `gsheets` via keyword (default: `gshe`) or hotkey
 3. `gsheets` will check the frontmost page with one of three outcomes:
 	1. The website is not a Google Sheet ▶️ check URL
-	2. The website is a Google Sheet but you don't have the right permissions ▶️ review the `Setting up` section
+	2. The website is a Google Sheet but you don't have the right permissions ▶️ review the `[Setting up](https://github.com/giovannicoppola/alfred-gsheets?tab=readme-ov-file#setting-up-%EF%B8%8F)` section
 	3. The website is a Google Sheet and you have at least viewing privileges ▶️ go to step 4
 4. `gsheets` will list the individual worksheets. Select one to generate a `gsheets` Workflow instance to browse that Sheet.</string>
 	<key>uidata</key>
@@ -428,6 +428,6 @@ Inspired by `I-sheet-you-not`, this Workflow creates new Workflows to access ind
 	<key>version</key>
 	<string>0.1</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/giovannicoppola/alfred-gsheets</string>
 </dict>
 </plist>
